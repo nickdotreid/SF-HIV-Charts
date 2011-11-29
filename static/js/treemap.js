@@ -17,7 +17,7 @@ d3.json("/data/treemap.json",function(json){
 		.data(treemap.nodes)
 	.enter().append("div")
 		.attr("class","cell")
-		.style("background",function(d){ return d.children ? color(d.name) : null;})
+		.style("background",function(d){ return color(d.name);})
 		.call(cell)
 		.text(function(d){ return d.children ? null :d.name; });
 		
