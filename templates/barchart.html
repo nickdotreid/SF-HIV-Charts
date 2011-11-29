@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block scripts %}
+{{super()}}
+<script src="/static/js/load.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/barchart.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".chart").trigger("load");
+});
+</script>
+{% endblock %}
+{% block content %}
+<div class="chart" data-src="/data"></div>
+{% endblock %}

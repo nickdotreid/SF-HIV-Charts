@@ -1,0 +1,228 @@
+{
+ "name": "mortality",
+ "children": [
+  {
+   "name": "Skin diseases",
+   "children": [
+    {"name": "Skin diseases", "size": 1869}
+   ]
+  },
+  {
+   "name": "Circulatory diseases",
+   "children": [
+    {"name": "Chronic rheumatic heart diseases", "size": 934},
+    {"name": "Diseases of veins lymphatic vessels and lymph nodes", "size": 4094},
+    {"name": "High blood pressure-hypertensive", "size": 4726},
+    {"name": "Diseases of arteries, arterioles and capillaries", "size": 10029},
+    {"name": "Other heart diseases", "size": 24718},
+    {"name": "Acute myocardial infarction - heart attack", "size": 25960},
+    {"name": "Cerebrovascular diseases - brain haemorrhage", "size": 43363},
+    {"name": "Chronic ischaemic heart disease", "size": 43957},
+    {"name": "Other circulatory diseases", "size": 303}    
+   ]
+  },
+  {
+   "name": "Blood diseases and immune systems",
+   "children": [
+    {"name": "Blood diseases and immune systems", "size": 1017}
+   ]
+  },
+  {
+   "name": "Digestive diseases",
+   "children": [
+    {"name": "Hernia", "size": 1011},
+    {"name": "Vascular disorders of intensine", "size": 2726},
+    {"name": "Gallbladder, biliary tract and pancreas", "size": 2852},
+    {"name": "Gastric and duodenal ulcer", "size": 2516},
+    {"name": "Oesophagus stomach and duodenum", "size": 3511},
+    {"name": "Liver diseases", "size": 7503},
+    {"name": "Other digestive diseases", "size": 5543}
+   ]
+  },
+  {
+   "name": "Accident and external",
+   "children": [
+    {"name": "Exposure to smoke, fire and flames", "size": 237},
+    {"name": "Other accidental threats to breathing", "size": 627},
+    {"name": "Accidental poisoning", "size": 1523},
+    {"name": "Hanging / strangulation", "size": 2011},
+    {"name": "Intentional self-harm", "size": 3377},
+    {
+     "name": "Falls",
+     "children": [
+     	{"name": "Fall from, out of or through a building", "size": 91},
+     	{"name": "Falls on and from stairs and steps", "size": 655},
+     	{"name": "Other falls", "size": 2903}     	
+     ]
+    },
+    {
+     "name": "Transport accidents",
+     "children": [
+     	{"name": "Car driver or passenger", "size": 808},
+     	{"name": "Motorcyclist", "size": 347},
+     	{"name": "Pedestrian in collision", "size": 153}, 
+     	{"name": "Cyclist", "size": 96},
+     	{"name": "Other transport accidents", "size": 566}
+     ]
+    },
+    {"name": "Other accidents", "size": 3807}
+   ]
+  },
+  {
+   "name": "Other causes",
+   "children": [
+    {"name": "Sudden infant death syndrome", "size": 147},
+    {"name": "Malaise and fatigue", "size": 265},
+    {"name": "Unknown causes", "size": 1229},
+    {"name": "Senility without psychosis", "size": 8069},
+    {"name": "Other causes", "size": 7374}
+   ]
+  },
+  {
+   "name": "Mental and behavioral disorders",
+   "children": [
+    {"name": "Schizophrenia", "size": 94},
+    {"name": "Mood (affective) disorders", "size": 98},
+    {
+     "name": "Due to drug use",
+     "children": [
+     	{"name": "Opiates (heroin)", "size": 344},
+     	{"name": "Alcohol", "size": 673},
+     	{"name": "Other drug use", "size": 267}
+     ]
+    },
+    {"name": "Dementias", "size": 18349},
+    {"name": "Other mental disorders", "size": 91}
+   ]
+  },
+  {
+   "name": "Congenital diseases",
+   "children": [
+    {"name": "Congenital diseases", "size": 1189}
+   ]
+  },
+  {
+   "name": "Babies dying around pregnancy",
+   "children": [
+    {"name": "Disorders related to length of gestation", "size": 5},
+    {"name": "Digestive system disorders", "size": 83},
+    {"name": "Infections specific to the perinatal period", "size": 19},
+    {"name": "Other disorders around pregancy", "size": 117}
+   ]
+  },
+  {
+   "name": "Cancers and neoplasms",
+   "children": [
+    {"name": "Skin cancer", "size": 2325},
+    {"name": "Prostate cancer", "size": 9638},
+    {"name": "Breast cancer", "size": 10353},    
+    {
+     "name": "Respiratory",
+     "children": [
+     	{"name": "Lung cancer", "size": 29977},
+     	{"name": "Other respiratory cancer", "size": 880}
+     ]
+    },
+    {
+     "name": "Stomach and digestive organs",
+     "children": [
+     	{"name": "Colon cancer", "size": 8698},
+     	{"name": "Cancer of the pancreas", "size": 7065},
+     	{"name": "Rectal cancer", "size": 5404},
+     	{"name": "Stomach cancer", "size": 4330},
+     	{"name": "Liver cancer", "size": 3339},
+     	{"name": "Other digestive cancer", "size": 10350}       	
+     ]
+    },    
+    {"name": "Other cancers and neoplasms", "size": 49087}
+   ]
+  },
+  {
+   "name": "Endocrine, nutritional and metabolic diseases",
+   "children": [
+    {"name": "Cystic fibrosis", "size": 84},
+    {"name": "Amyloidosis", "size": 245},
+    {"name": "Diabetes", "size": 5223},
+    {"name": "Other endrocine, nutritional and metabolic", "size": 1633}
+   ]
+  },
+  {
+   "name": "Respiratory diseases",
+   "children": [
+    {"name": "Pneuomonitis due to food and vomit", "size": 2828},
+    {"name": "Asthma", "size": 999},
+    {
+     "name": "Influenza and pneumonia",
+     "children": [
+     	{"name": "Influenza and pneuomonia", "size": 25381},
+     	{"name": "Swine flu", "size": 142}
+     ]
+    },
+    {
+     "name": "Chronic lower respiratory infections",
+     "children": [
+     	{"name": "Bronchitis, emphysema and other chronic lung diseases", "size": 23870},
+     	{"name": "Other chronic lower respiratory infections", "size": 1474}
+     ]
+    },  
+	{"name": "Lung diseases due to external agents", "size": 3198},
+    {"name": "Other respiratory diseases", "size": 9384} 
+   ]
+  },
+  {
+   "name": "Genitourinary diseases",
+   "children": [
+    {"name": "Urolithiasis", "size": 155},
+    {"name": "Diseases of the male genital organs", "size": 229},
+    {"name": "Other disorders of the kidney and ureter", "size": 652},
+    {"name": "Kidney and renal tubulo-interstitial diseases", "size": 922},
+    {"name": "Renal failure", "size": 2727},
+    {"name": "Other disorders of the urinary system", "size": 7394},
+    {"name": "Other genitourinary diseases", "size": 327}
+   ]
+  },
+  {
+   "name": "Diseases of the nervous system",
+   "children": [
+    {"name": "Muscular dystrophy", "size": 118},
+    {"name": "Cerebral palsy", "size": 393},
+    {"name": "Epilepsy", "size": 951},
+    {"name": "Multiple sclerosis", "size": 1004},
+    {"name": "Motor neuron disease", "size": 1941},
+    {"name": "Parkinson's disease", "size": 5021},
+    {"name": "Alzheimer's disease", "size": 6757},
+    {"name": "Other nervous system disorders", "size": 2298}    
+   ]
+  },
+  {
+   "name": "Musculoskeletal disorders",
+   "children": [
+    {"name": "Bone density disorders", "size": 1301},  
+    {
+     "name": "Arthropathies",
+     "children": [
+     	{"name": "Arthritis", "size": 783},
+     	{"name": "Rheumatoid arthritis", "size": 662},
+     	{"name": "Other arthropathies", "size": 87}
+     ]
+    },    
+    {
+     "name": "Osteopathies and chondropathies",
+     "children": [
+    	{"name": "Osteoporosis", "size": 1019},
+     	{"name": "Other osteopathies", "size": 509}
+     ]
+    }, 
+    {"name": "Muscle disorders", "size": 167},
+    {"name": "Spinal disorders", "size": 364},
+    {"name": "Other musculoskeletal disorders", "size": 574}      
+   ]
+  }, 
+  {
+   "name": "Pregnancy and childbirth",
+   "children": [
+    {"name": "Pregnancy and childbirth", "size": 35}
+   ]
+  }
+ ]
+}
