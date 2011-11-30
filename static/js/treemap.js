@@ -6,11 +6,13 @@ $("body").delegate(".nav.axis a","click",function(event){
 	event.preventDefault();
 	data_axis = $(this).data("value");
 	
+	$(".chart").hide();
 	if($(".chart."+data_axis).length>0){
-		// show treemap
+		$(".chart."+data_axis).show();
 		return false;
 	}
-	chart = $("#templates .chart.treemap").clone().addClass(data_axis).appendTo($("#maparea"));
+	chart = $("#templates .chart.treemap").clone().addClass(data_axis).appendTo($("#maparea")).show();
+	$(".nav ."+data_axis,chart).hide();
 	div = d3.select(".chart."+data_axis).append("div")
 		.attr("class","map")
 		.style("position", "relative")
