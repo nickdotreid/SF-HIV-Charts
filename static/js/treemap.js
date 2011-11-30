@@ -58,7 +58,7 @@ $("body").delegate(".nav.axis a","click",function(event){
 			}))
 		.transition().duration(1500)
 		.call(cell);
-	$("#total .number").html(total);
+	$("#total .number").html(addCommas(total));
 	
 });
 
