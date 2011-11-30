@@ -1,40 +1,63 @@
-var w = $(".chart").width(),
+var w = 700,
 	h = 500,
 	color = d3.scale.category20c();
 
-var treemap = d3.layout.treemap()
-	.size([w, h])
-	.sticky(true)
-	.value(function(d) { return d.size; });
-
-var div = d3.select(".chart").append("div")
-	.style("position", "relative")
-	.style("width", w + "px")
-	.style("height", h + "px");
+$("body").delegate(".nav.axis a","click",function(event){
+	event.preventDefault();
+	data_axis = $(this).data("value");
 	
-d3.json("/data/treemap.json",function(json){
-	div.data([json]).selectAll("div")
-		.data(treemap.nodes)
-	.enter().append("div")
-		.attr("class","cell")
-		.style("background",function(d){ return color(d.name);})
-		.call(cell)
-		.text(function(d){ return d.children ? null :d.name; });
+	if($(".chart."+data_axis).length>0){
+		// show treemap
+		return false;
+	}
+	chart = $("#templates .chart.treemap").clone().addClass(data_axis).appendTo($("#maparea"));
+	div = d3.select(".chart."+data_axis).append("div")
+		.attr("class","map")
+		.style("position", "relative")
+		.style("width", w + "px")
+		.style("height", h + "px");
 	
-	$(".nav a").click(function(){
-		$(".nav a").removeClass("selected");
-		item = $(this);
-		item.addClass("selected");
-		var total = 0;
-		div.selectAll("div")
-			.data(treemap.value(function(d){
-				total += d[item.data("value")];
-				return d[item.data("value")];
-				}))
-			.transition().duration(1500)
-			.call(cell);
-		$("#total .number").html(total);
+	$.ajax({
+		url:"/data/treemap.json",
+		data:{axis:data_axis},
+		dataType:"json",
+		type:"post",
+		success:function(json){
+			var treemap = d3.layout.treemap()
+				.size([w, h])
+				.sticky(true)
+				.value(function(d) { return d.size; });
+			div.data([json]).selectAll("div")
+				.data(treemap.nodes)
+			.enter().append("div")
+				.attr("class","cell")
+				.style("background",function(d){ return color(d.name);})
+				.call(cell)
+				.text(function(d){ return d.children ? null :d.name; });
+			chart.data({'treemap':treemap,'div':div});
+		}
 	});
+}).delegate(".nav.section a","click",function(event){
+	event.preventDefault();
+	item = $(this);
+	chart = item.parents(".chart:first");
+	$(".nav a").removeClass("selected");
+	$('a.control',chart).removeClass("selected");
+	item.addClass("selected");
+	
+	div = chart.data("div");
+	treemap = chart.data("treemap");
+	
+	var total = 0;
+	div.selectAll("div")
+		.data(treemap.value(function(d){
+			total += d[item.data("value")];
+			return d[item.data("value")];
+			}))
+		.transition().duration(1500)
+		.call(cell);
+	$("#total .number").html(total);
+	
 });
 
 function cell() {

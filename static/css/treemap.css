@@ -6,3 +6,17 @@
   position: absolute;
   text-indent: 2px;
 }
+
+.treemap{
+	position:relative;
+	padding-left:200px;
+}
+
+.treemap .nav{
+	overflow:hidden;
+	display:block;
+	width:200px;
+	position:absolute;
+	top:0px;
+	left:0px;
+}
