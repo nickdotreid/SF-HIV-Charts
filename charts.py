@@ -25,8 +25,8 @@ def data():
 def data_treemap():
 	results = {}
 	axis = 'ethnicity'
-	if request.method == 'POST' and 'axis' in request.post:
-		axis = request.post['axis']
+	if request.method == 'POST' and 'axis' in request.form:
+		axis = request.form['axis']
 	for test in Test.query.all():
 		key = ""
 		if axis == 'ethnicity':
