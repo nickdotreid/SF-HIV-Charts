@@ -11,14 +11,15 @@
 {% endblock %}
 {% block content %}
 <ul class="nav">
-	<li><a id="size" class="button">Total</a></li>
-	<li><a id="methadone" class="button">Methadone</a></li>
-	<li><a id="cbo" class="button">Community Based Organization</a></li>
-	<li><a id="male" class="button">Male</a></li>
-	<li><a id="female" class="button">Female</a></li>
-	<li><a id="trans" class="button">Trans</a></li>
+	<li><a id="size" data-value="size" class="button">Total</a></li>
+	<li><a id="methadone" data-value="Methadone" class="button">Methadone</a></li>
+	<li><a id="cbo" data-value="Community Based Organization" class="button">Community Based Organization</a></li>
+	<li><a id="male" data-value="Male" class="button">Male</a></li>
+	<li><a id="female" data-value="Female" class="button">Female</a></li>
+	<li><a id="trans" data-value="Trans" class="button">Trans</a></li>
 </ul>
-<div id="chart" ></div>
+<div id="total"><span class="number"></span> Tests</div>
+<div class="chart" ></div>
 
 <script type="text/javascript" src="/static/js/treemap.js"></script>
 {% endblock %}

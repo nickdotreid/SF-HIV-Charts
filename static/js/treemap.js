@@ -1,4 +1,4 @@
-var w = 700,
+var w = $(".chart").width(),
 	h = 500,
 	color = d3.scale.category20c();
 
@@ -7,7 +7,7 @@ var treemap = d3.layout.treemap()
 	.sticky(true)
 	.value(function(d) { return d.size; });
 
-var div = d3.select("#chart").append("div")
+var div = d3.select(".chart").append("div")
 	.style("position", "relative")
 	.style("width", w + "px")
 	.style("height", h + "px");
@@ -20,42 +20,20 @@ d3.json("/data/treemap.json",function(json){
 		.style("background",function(d){ return color(d.name);})
 		.call(cell)
 		.text(function(d){ return d.children ? null :d.name; });
-		
-	d3.select("#size").on("click",function(){
+	
+	$(".nav a").click(function(){
+		$(".nav a").removeClass("selected");
+		item = $(this);
+		item.addClass("selected");
+		var total = 0;
 		div.selectAll("div")
-			.data(treemap.value(function(d){ return d.size; }))
+			.data(treemap.value(function(d){
+				total += d[item.data("value")];
+				return d[item.data("value")];
+				}))
 			.transition().duration(1500)
 			.call(cell);
-	});
-	d3.select("#methadone").on("click",function(){
-		div.selectAll("div")
-			.data(treemap.value(function(d){ return d['Methadone'];	}))
-			.transition().duration(1500)
-			.call(cell);
-	});
-	d3.select("#cbo").on("click",function(){
-		div.selectAll("div")
-			.data(treemap.value(function(d){ return d['Community Based Organization']; }))
-			.transition().duration(1500)
-			.call(cell);
-	});
-	d3.select("#male").on("click",function(){
-		div.selectAll("div")
-			.data(treemap.value(function(d){ return d['Male']; }))
-			.transition().duration(1500)
-			.call(cell);
-	});
-	d3.select("#female").on("click",function(){
-		div.selectAll("div")
-			.data(treemap.value(function(d){ return d['Female']; }))
-			.transition().duration(1500)
-			.call(cell);
-	});
-	d3.select("#trans").on("click",function(){
-		div.selectAll("div")
-			.data(treemap.value(function(d){ return d['Trans']; }))
-			.transition().duration(1500)
-			.call(cell);
+		$("#total .number").html(total);
 	});
 });
 
