@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block scripts %}
+	{{super()}}
+	<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.csv.js"></script>
+	<script type="text/javascript" src="/static/js/data-parse.js"></script>
+	<script type="text/javascript" src="/static/js/graph.js"></script>
+<!--	<script type="text/javascript" src="/static/js/highlight.js"></script>	-->
+	<script type="text/javascript" src="/static/js/population.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="navigation">
+	<ul>
+		<li><a href="city" class="control selected" data-value="city">Cumulative Total</a></li>
+		<li><a href="demographic" class="control" data-value="demographic">Cumulative by Demographic</a></li>
+		<li><a href="incidence-total" class="control" data-value="incidence-total">New Cases Total</a></li>
+		<li><a href="incidence" class="control" data-value="incidence">New Cases by Demographic</a></li>
+	</ul>
+</div>
+<br style="clear:both;" />
+<div class="description">
+	<div class="numerator"></div>
+	<div class="demonator"></div>
+</div>
+<div class="legend">
+	<div class="label Population"><div class="color"></div>HIV Positive Population</div>
+	<div class="label Incidence"><div class="color"></div>New Cases of HIV</div>
+</div>
+<br style="clear:both;" />
+<div class="chart" data-source="/static/data/2010PosPopCensus.csv"></div>
+{% endblock %}
+
+{% block footer %}
+<p>The HIV+ population data illustrated on this page was collected by the San Francisco Department of Public Health HIV Prevention Section.</p>
+<p>San Francisco city wide population demographics are from the 2010 US Census.</p>
+<p>This is the bottom.  Have a nice day.</p>
+{{super()}}
+{% endblock %}
+
+{% block templates %}
+<div class="highlight">
+	<div class="percent"><div class="number"></div>%</div>
+	<div class="total"><div class="number"></div> people</div>
+	<form class="comment" action="#" method="post">
+		<textarea name="comment"></textarea>
+		<input type="submit" value="Share" />
+	</form>
+</div>
+{% endblock %}

@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
 	return render_template('treemap.html')
 	
+@app.route('/population')
+def population_map():
+	return render_template('population.html')
+	
 @app.route('/bar')
 def bar_charts():
 	return render_template('barchart.html')
