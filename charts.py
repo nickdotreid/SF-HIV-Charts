@@ -33,6 +33,8 @@ def data_treemap():
 			key = test.ethnicity
 		if axis == 'gender':
 			key = test.gender
+		if axis == 'site':
+			key = test.siteID
 		if key == "":
 			return False
 		

@@ -10,7 +10,7 @@
 
 {% endblock %}
 {% block content %}
-<ul class="nav axis">
+<ul class="nav axis main">
 	<li><a class="button control" data-value="ethnicity" href="ethnicity">Ethnicity</a></li>
 	<li><a class="button control" data-value="gender" href="gender">Gender</a></li>
 	<li><a class="button control" data-value="site" href="site">Site</a></li>
@@ -38,6 +38,20 @@
 				<li><a id="trans" data-value="Trans" class="button control" href="#">Trans</a></li>
 			</ul>
 		</li>
+		<li class="ethnicity">
+			<h4>Ethnicity</h4>
+			<ul>
+				<li><a data-value="White" class="button control" href="#">White</a></li>
+				<li><a data-value="African American" class="button control" href="#">African American</a></li>
+				<li><a data-value="Latino" class="button control" href="#">Hispanic/Latino</a></li>
+				<li><a data-value="Asian" class="button control" href="#">Asian/Pacific Islander</a></li>
+				<li><a data-value="Native American" class="button control" href="#">Native American</a></li>
+				<li><a data-value="Other" class="button control" href="#">Other</a></li>
+				<li><a data-value="Declined" class="button control" href="#">Declined</a></li>
+			</ul>
+		</li>
 	</ul>
+	<div class="total">Showing <span class="number"></span> HIV Tests</div>
+	<div class="map"></div>
 </div>
 {% endblock %}

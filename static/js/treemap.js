@@ -13,8 +13,7 @@ $("body").delegate(".nav.axis a","click",function(event){
 	}
 	chart = $("#templates .chart.treemap").clone().addClass(data_axis).appendTo($("#maparea")).show();
 	$(".nav ."+data_axis,chart).hide();
-	div = d3.select(".chart."+data_axis).append("div")
-		.attr("class","map")
+	div = d3.select(".chart."+data_axis+" .map")
 		.style("position", "relative")
 		.style("width", w + "px")
 		.style("height", h + "px");
@@ -58,7 +57,7 @@ $("body").delegate(".nav.axis a","click",function(event){
 			}))
 		.transition().duration(1500)
 		.call(cell);
-	$("#total .number").html(addCommas(total));
+	$(".total .number",chart).html(addCommas(total));
 	
 });
 
