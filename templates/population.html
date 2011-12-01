@@ -12,22 +12,17 @@
 
 
 {% block content %}
-<div class="navigation">
-	<ul>
-		<li><a href="city" class="control selected" data-value="city">Cumulative Total</a></li>
-		<li><a href="demographic" class="control" data-value="demographic">Cumulative by Demographic</a></li>
-		<li><a href="incidence-total" class="control" data-value="incidence-total">New Cases Total</a></li>
-		<li><a href="incidence" class="control" data-value="incidence">New Cases by Demographic</a></li>
+<div class="controls">
+	<ul class="numerator">
+		<li><label><input id="new-num" type="radio" name="num" value="Incidence" />New Infections</label></li>
+		<li><label><input id="pos-num" type="radio" name="num" value="Population" />Positive Population</label></li>
 	</ul>
-</div>
-<br style="clear:both;" />
-<div class="description">
-	<div class="numerator"></div>
-	<div class="demonator"></div>
-</div>
-<div class="legend">
-	<div class="label Population"><div class="color"></div>HIV Positive Population</div>
-	<div class="label Incidence"><div class="color"></div>New Cases of HIV</div>
+	<ul class="denominator">
+		<li><label><input id="pos-denom" type="radio" name="denom" value="Population" />Positive Population</label></li>
+		<li><label><input type="radio" id="pop-denom" name="denom" value="Census" />SF Population</label></li>
+	</ul>
+	<label><input id="demographic" type="checkbox" />By Demographic</label>
+	<label><input id="scale" type="checkbox" />Modify Scale</label>
 </div>
 <br style="clear:both;" />
 <div class="chart" data-source="/static/data/2010PosPopCensus.csv"></div>
