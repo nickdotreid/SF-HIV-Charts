@@ -6,47 +6,43 @@
   position: absolute;
   text-indent: 2px;
 }
-ul.nav.main{
-	padding:0px;
-}
-.nav.main li{
-	float:left;
-	list-style-type:none;
-	padding:0px;
+
+.navigation{
+	clear:both;
+	height:auto;
 	margin:0px;
+	padding:0px;
 }
-.nav.main li a{
-	margin:3px 7px 3px 0px;
-	text-decoration:none;
-	font-size:1.2em;
+.navigation li.col{
+	width:170px;
+	float:left;
+	display:block;
+	list-style-type:none;
 }
+.navigation li.col li{
+	float:none;
+	width:auto;
+	display:block;
+}
+
+.navigation a.button{
+	margin-bottom:4px;
+}
+.navigation a.button.type{
+	font-size:1.1em;
+}
+.navigation a.button.filter{
+	
+}
+
 
 .treemap{
 	clear:both;
 }
-
-.treemap .nav{
-	float:left;
-	width:170px;
-	overflow:hidden;
-}
-
-.treemap .nav h4{
-	margin:0px;
-	padding:0px;
-	font-size:1em;
-}
-
-.treemap .nav ul{
-	width:170px;
-	float:none;
-	display:block;
-}
-
 .chart.treemap .map{
-	width:650px;
+	width:auto;
 	float:left;
-	height:500px;
+	height:400px;
 }
 
 .chart.treemap .total{

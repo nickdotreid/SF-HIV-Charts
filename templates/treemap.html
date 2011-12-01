@@ -7,13 +7,37 @@
 {{super()}}
 <script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
 <script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
-
 {% endblock %}
 {% block content %}
-<ul class="nav axis main">
-	<li><a class="button control" data-value="ethnicity" href="ethnicity">Ethnicity</a></li>
-	<li><a class="button control" data-value="gender" href="gender">Gender</a></li>
-	<li><a class="button control" data-value="site" href="site">Site</a></li>
+<ul class="navigation">
+	<li class="col ethnicity">
+		<a class="button control type" data-value="ethnicity" href="ethnicity">Ethnicity</a>
+		<ul>
+			<li><a data-value="White" class="button control filter" href="#">White</a></li>
+			<li><a data-value="African American" class="button control filter" href="#">African American</a></li>
+			<li><a data-value="Latino" class="button control filter" href="#">Hispanic/Latino</a></li>
+			<li><a data-value="Asian" class="button control filter" href="#">Asian/Pacific Islander</a></li>
+			<li><a data-value="Native American" class="button control filter" href="#">Native American</a></li>
+			<li><a data-value="Other" class="button control filter" href="#">Other</a></li>
+			<li><a data-value="Declined" class="button control filter" href="#">Declined</a></li>
+		</ul>
+	</li>
+	<li class="col gender">
+		<a class="button control type" data-value="gender" href="gender">Gender</a>
+		<ul>
+			<li><a id="male" data-value="Male" class="button control filter" href="#">Male</a></li>
+			<li><a id="female" data-value="Female" class="button control filter" href="#">Female</a></li>
+			<li><a id="trans" data-value="Trans" class="button control filter" href="#">Trans</a></li>
+		</ul>
+	</li>
+	<li class="col site">
+		<a class="button control type" data-value="site" href="site">Site</a>
+		<ul>
+			<li><a id="methadone" data-value="Methadone" class="button control filter" href="#">Methadone</a></li>
+			<li><a id="cbo" data-value="Community Based Organization" class="button control filter" href="#">Community Based Organization</a></li>
+		</ul>
+	</li>
+	<li class="col"><a id="total" data-value="total" class="button control filter" href="#">Total</a></li>
 </ul>
 <div id="maparea"></div>
 <script type="text/javascript" src="/static/js/treemap.js"></script>
@@ -21,36 +45,6 @@
 
 {% block templates %}
 <div class="chart treemap">
-	<ul class="nav section">
-		<li><a id="size" data-value="size" class="button control" href="#">Total</a></li>
-		<li class="site">
-			<h4>Test Location Type</h4>
-			<ul>
-				<li><a id="methadone" data-value="Methadone" class="button control" href="#">Methadone</a></li>
-				<li><a id="cbo" data-value="Community Based Organization" class="button control" href="#">Community Based Organization</a></li>
-			</ul>
-		</li>
-		<li class="gender">
-			<h4>Gender</h4>
-			<ul>
-				<li><a id="male" data-value="Male" class="button control" href="#">Male</a></li>
-				<li><a id="female" data-value="Female" class="button control" href="#">Female</a></li>
-				<li><a id="trans" data-value="Trans" class="button control" href="#">Trans</a></li>
-			</ul>
-		</li>
-		<li class="ethnicity">
-			<h4>Ethnicity</h4>
-			<ul>
-				<li><a data-value="White" class="button control" href="#">White</a></li>
-				<li><a data-value="African American" class="button control" href="#">African American</a></li>
-				<li><a data-value="Latino" class="button control" href="#">Hispanic/Latino</a></li>
-				<li><a data-value="Asian" class="button control" href="#">Asian/Pacific Islander</a></li>
-				<li><a data-value="Native American" class="button control" href="#">Native American</a></li>
-				<li><a data-value="Other" class="button control" href="#">Other</a></li>
-				<li><a data-value="Declined" class="button control" href="#">Declined</a></li>
-			</ul>
-		</li>
-	</ul>
 	<div class="total">Showing <span class="number"></span> HIV Tests</div>
 	<div class="map"></div>
 </div>
