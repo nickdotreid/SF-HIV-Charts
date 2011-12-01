@@ -2,27 +2,23 @@ var color = d3.scale.category20c();
 $(document).ready(function(){
 	$("body").delegate(".navigation a.type","click",function(event){
 		event.preventDefault();
-		type = $(this).data("value");
-	
 		$(".navigation a.type.selected").removeClass("selected");
 		$(this).addClass("selected");
-		
-		$.address.parameter("type", type);
-		
-	//	$(".chart").trigger("draw");
+		$.address.parameter("type", $(this).data("value"));
 	}).delegate(".navigation a.filter","click",function(event){
 		event.preventDefault();
 		$(".navigation a.filter.selected").removeClass("selected");
 		$(this).addClass("selected");
 		$.address.parameter("filter", $(this).data("value"));
-	//	$(".chart").trigger("draw");
 	}).delegate(".chart","draw",function(){		
 		chart = $(this);
 		div = chart.data("div");
 		treemap = chart.data("treemap");
 		
-		div.selectAll("div").data(treemap.value(cell_size)).transition().duration(1500).call(cell);
-		
+		div.selectAll("div")
+			.data(treemap.value(cell_size))
+			.transition().duration(1500)
+			.call(cell);
 	}).delegate(".chart","loadr",function(){
 		type=$(this).data("type");
 		
@@ -77,8 +73,12 @@ $.address.change(function(event){
 		type:$.address.parameter("type"),
 		filter:$.address.parameter("filter")
 	});
+	chart.trigger("loading");
 	//load delay?
-	chart.trigger("loadr");
+	if(chart.data("load_delay")){
+		clearTimeout(chart.data("load_delay"));
+	}
+	chart.data("load_delay",setTimeout('chart.trigger("loadr");',200))
 });
 
 function cell_size(d){
