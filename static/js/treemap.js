@@ -6,12 +6,15 @@ $("body").delegate(".nav.axis a","click",function(event){
 	event.preventDefault();
 	data_axis = $(this).data("value");
 	
+	$(".nav.axis a.selected").removeClass("selected");
+	$(this).addClass("selected");
+	
 	$(".chart").hide();
 	if($(".chart."+data_axis).length>0){
 		$(".chart."+data_axis).show();
 		return false;
 	}
-	chart = $("#templates .chart.treemap").clone().addClass(data_axis).appendTo($("#maparea")).show();
+	chart = $("#templates .chart.treemap").clone().addClass(data_axis).addClass("loading").appendTo($("#maparea")).show();
 	$(".nav ."+data_axis,chart).hide();
 	div = d3.select(".chart."+data_axis+" .map")
 		.style("position", "relative")
@@ -35,7 +38,7 @@ $("body").delegate(".nav.axis a","click",function(event){
 				.style("background",function(d){ return color(d.name);})
 				.call(cell)
 				.text(function(d){ return d.children ? null :d.name; });
-			chart.data({'treemap':treemap,'div':div});
+			chart.data({'treemap':treemap,'div':div}).removeClass("loading");
 			$(".nav a:first",chart).click();
 		}
 	});
@@ -43,7 +46,7 @@ $("body").delegate(".nav.axis a","click",function(event){
 	event.preventDefault();
 	item = $(this);
 	chart = item.parents(".chart:first");
-	$(".nav a").removeClass("selected");
+	$(".nav a",chart).removeClass("selected");
 	$('a.control',chart).removeClass("selected");
 	item.addClass("selected");
 	
