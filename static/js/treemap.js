@@ -36,6 +36,7 @@ $("body").delegate(".nav.axis a","click",function(event){
 				.call(cell)
 				.text(function(d){ return d.children ? null :d.name; });
 			chart.data({'treemap':treemap,'div':div});
+			$(".nav a:first",chart).click();
 		}
 	});
 }).delegate(".nav.section a","click",function(event){
@@ -52,8 +53,12 @@ $("body").delegate(".nav.axis a","click",function(event){
 	var total = 0;
 	div.selectAll("div")
 		.data(treemap.value(function(d){
-			total += d[item.data("value")];
-			return d[item.data("value")];
+			val = d[item.data("value")];
+			if(!val){
+				val = 0;
+			}
+			total += val;
+			return val;
 			}))
 		.transition().duration(1500)
 		.call(cell);
