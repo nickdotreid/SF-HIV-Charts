@@ -3,6 +3,15 @@ from models import *
 
 app = Flask(__name__)
 
+age_groups = [
+	{'min':0,'max':12,'name':'0-12'},
+	{'min':13,'max':19,'name':'13-19'},
+	{'min':20,'max':29,'name':'20-29'},
+	{'min':30,'max':39,'name':'30-39'},
+	{'min':40,'max':49,'name':'40-49'},
+	{'min':50,'max':290,'name':'50+'}
+	]
+
 @app.route('/')
 def index():
 	return render_template('treemap.html')
@@ -39,6 +48,10 @@ def data_treemap():
 			key = test.gender
 		if axis == 'site':
 			key = test.siteID
+		if axis == 'age':
+			for group in age_groups:
+				if test.age >= group['min'] and test.age <= group['max']:
+					key = group['name']
 		if key == "":
 			return False
 		
@@ -74,6 +87,10 @@ def data_treemap():
 				results[key] = add_or_increment('Declined',results[key])
 			if test.ethnicity == 'NATIVE AMERICAN':
 				results[key] = add_or_increment('Native American',results[key])
+		if axis != 'age':
+			for group in age_groups:
+				if test.age >= group['min'] and test.age <= group['max']:
+					results[key] = add_or_increment(group['name'],results[key])
 		
 	ordered_results = []
 	for result in results:
