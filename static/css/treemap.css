@@ -38,10 +38,10 @@
 
 .treemap{
 	clear:both;
+	overflow:hidden;
 }
 .chart.treemap .map{
 	width:auto;
-	float:left;
 	height:400px;
 }
 

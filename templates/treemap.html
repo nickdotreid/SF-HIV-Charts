@@ -5,8 +5,10 @@
 {% endblock %}
 {% block scripts %}
 {{super()}}
+<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
 <script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
 <script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="/static/js/treemap.js"></script>
 {% endblock %}
 {% block content %}
 <ul class="navigation">
@@ -37,15 +39,13 @@
 			<li><a id="cbo" data-value="Community Based Organization" class="button control filter" href="#">Community Based Organization</a></li>
 		</ul>
 	</li>
-	<li class="col"><a id="total" data-value="total" class="button control filter" href="#">Total</a></li>
+	<li class="col"><a id="total" data-value="size" class="button control filter" href="#">Total</a></li>
 </ul>
-<div id="maparea"></div>
-<script type="text/javascript" src="/static/js/treemap.js"></script>
-{% endblock %}
-
-{% block templates %}
 <div class="chart treemap">
 	<div class="total">Showing <span class="number"></span> HIV Tests</div>
 	<div class="map"></div>
 </div>
+{% endblock %}
+
+{% block templates %}
 {% endblock %}
