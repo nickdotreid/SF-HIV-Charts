@@ -1,4 +1,4 @@
-var w = 700,
+var w = 650,
 	h = 500,
 	color = d3.scale.category20c();
 
@@ -59,6 +59,10 @@ $("body").delegate(".nav.axis a","click",function(event){
 		.call(cell);
 	$(".total .number",chart).html(addCommas(total));
 	
+});
+
+$(document).ready(function(){
+	$(".nav a:first").click();
 });
 
 function cell() {
