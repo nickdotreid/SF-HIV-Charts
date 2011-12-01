@@ -19,8 +19,10 @@ $(document).ready(function(){
 			.data(treemap.value(cell_size))
 			.transition().duration(1500)
 			.call(cell);
+		chart.trigger("update");
 	}).delegate(".chart","loadr",function(){
-		type=$(this).data("type");
+		chart = $(this);
+		type=chart.data("type");
 		
 		div = d3.select(".chart .map")
 			.style("position", "relative")
@@ -33,7 +35,8 @@ $(document).ready(function(){
 			dataType:"json",
 			type:"post",
 			success:function(json){
-				$(".map div").remove();
+				$(".map div",chart).remove();
+				chart.data("data",json);
 				var treemap = d3.layout.treemap()
 					.size([chart.width(), chart.height()])
 					.sticky(true)
@@ -45,9 +48,37 @@ $(document).ready(function(){
 						.style("background",function(d){ return color(d.name);})
 						.call(cell)
 						.text(function(d){ return d.children ? null :d.name; });
-				chart.data({'div':div,'treemap':treemap});
+				chart.data({'div':div,'treemap':treemap})
+					.trigger("update");
 			}
 		});
+	}).delegate(".chart","update",function(){
+		chart = $(this);
+		chart.trigger("update_total");
+		$(".total .number",chart).html(addCommas(chart.data("total")));
+		filter = $(".navigation a.selected.filter:first").data("value");
+		if(!filter || filter=='size'){
+			$(".total .filter",chart).html("");
+		}else{
+			$(".total .filter",chart).html(" "+filter);
+		}
+		
+	}).delegate(".chart","update_total",function(){
+		chart = $(this);
+		data = chart.data("data");
+		total = 0;
+		filter = $(".navigation a.selected.filter:first").data("value");
+		if(!filter){
+			filter = 'size';
+		}
+		for(node in data['children']){
+			val = data['children'][node][filter];
+			if(!val){
+				val = 0;
+			}
+			total += val;
+		}
+		chart.data("total",total);
 	}).delegate(".chart","loading",function(){
 		chart = $(this);
 		$(".map div").animate({
@@ -59,7 +90,10 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$(".navigation a.type:first").click();
+	
+	if(!$.address.parameter("type") || $.address.parameter("type")==""){
+		$(".navigation a.type:first").click();
+	}
 });
 
 $.address.change(function(event){
@@ -90,6 +124,7 @@ function cell_size(d){
 	if(!val){
 		val = 0;
 	}
+	
 	return val;
 }
 
