@@ -4,6 +4,10 @@ body{
 	background:#CCC;
 }
 
+a,a:visited{
+	color:#00F;
+}
+
 #templates{
 	display:none;
 }
