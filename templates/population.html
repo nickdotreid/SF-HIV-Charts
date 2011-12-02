@@ -12,18 +12,18 @@
 
 
 {% block content %}
-<div class="controls">
-	<ul class="numerator">
-		<li><label><input id="new-num" type="radio" name="num" value="Incidence" />New Infections</label></li>
-		<li><label><input id="pos-num" type="radio" name="num" value="Population" />Positive Population</label></li>
-	</ul>
-	<ul class="denominator">
-		<li><label><input id="pos-denom" type="radio" name="denom" value="Population" />Positive Population</label></li>
-		<li><label><input type="radio" id="pop-denom" name="denom" value="Census" />SF Population</label></li>
-	</ul>
+<form class="controls">
+	<fieldset class="numerator">
+		<label><input id="new-num" type="radio" name="num" value="Incidence" />New Infections</label>
+		<label><input id="pos-num" type="radio" name="num" value="Population" />Positive Population</label>
+	</fieldset>
+	<fieldset class="denominator">
+		<label><input id="pos-denom" type="radio" name="denom" value="Population" />Positive Population</label>
+		<label><input type="radio" id="pop-denom" name="denom" value="Census" />SF Population</label>
+	</fieldset>
 	<label><input id="demographic" type="checkbox" />By Demographic</label>
 	<label><input id="scale" type="checkbox" />Modify Scale</label>
-</div>
+</form>
 <br style="clear:both;" />
 <div class="chart" data-source="/static/data/2010PosPopCensus.csv"></div>
 {% endblock %}

@@ -61,7 +61,7 @@ $(document).ready(function(){
 		chart = $(this);
 		data = chart.data("data");
 		total = 0;
-		filter = $.address.parameter("filter");
+		filter = unescape($.address.parameter("filter"));
 		if(!filter){
 			filter = 'size';
 		}
@@ -110,7 +110,7 @@ $.address.change(function(event){
 });
 
 function cell_size(d){
-	filter = $.address.parameter("filter");
+	filter = unescape($.address.parameter("filter"));
 	if(!filter){
 		filter = 'size';
 	}

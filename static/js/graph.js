@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
 		}
 		population = data['Population'];
 		for(demographic in population){
-			$(chart).append('<div class="bar" data-demographic="'+demographic+'"><h3>'+demographic+'</h3><div class="total"><div class="percent number"></div> of <div class="number"></div> People</div><div class="container"><div class="line"><div class="percent"><div class="number"></div>%</div></div></div></div>');
+			$(chart).append('<div class="bar" data-demographic="'+demographic+'"><h3>'+demographic+'</h3><div class="total"><div class="percent number"></div> of <div class="number"></div><span class="qualify"></span> <span class="people"></span> <span class="are"></span> '+demographic+'</div><div class="container"><div class="line"><div class="percent"><div class="number"></div>%</div></div></div></div>');
 		}
 		chart.trigger("draw");
 	}).bind("draw",function(event){
@@ -38,7 +38,25 @@ jQuery(document).ready(function(){
 				max_percent = bar.data("percent");
 			}
 			$(".total .percent",bar).html(formatPercent(bar.data("percent"))+"%");
+			if($("#demographic").attr("checked") && bar.data("demographic")!="Total"){
+				$(".total .qualify",bar).html(" "+bar.data("demographic"));
+			}else{
+				$(".total .qualify",bar).html("");
+			}
+			if($(".denominator input:checked").val()=='Census'){
+				$(".total .people",bar).html("people in SF");
+			}else{
+				$(".total .people",bar).html("HIV+ people in SF");
+			}
+			if($(".numerator input:checked").val()=='Incidence'){
+				$(".total .are",bar).html("became HIV+ in 2010");
+			}else{
+				$(".total .are",bar).html("are HIV+");
+			}
 		});
+		if(!$("#scale").attr("checked")){
+			max_percent = 1;
+		}
 		$('.bar',chart).each(function(){
 			bar = $(this);
 			container_width = $(".container",bar).width();

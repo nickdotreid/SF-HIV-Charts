@@ -12,13 +12,6 @@
 {% endblock %}
 {% block content %}
 <form class="navigation">
-	<fieldset class="type">
-		<legend>Aspect to view</legend>
-		<label><input type="radio" name="type" value="ethnicity">Ethnicity</label>
-		<label><input type="radio" name="type" value="gender">Gender</label>
-		<label><input type="radio" name="type" value="age">Age</label>
-		<label><input type="radio" name="type" value="site">Location Type</label>
-	</fieldset>
 	<fieldset class="filter">
 		<legend>View only group</legend>
 		<label><input type="radio" name="filter" value="size">View All</label>
@@ -26,7 +19,7 @@
 			<legend>Ethnicity</legend>
 			<label><input type="radio" name="filter" value="White">White</label>
 			<label><input type="radio" name="filter" value="African American">African American</label>
-			<label><input type="radio" name="filter" value="Latio">Hispanic/Latino</label>
+			<label><input type="radio" name="filter" value="Latino">Hispanic/Latino</label>
 			<label><input type="radio" name="filter" value="Asian">Asian/Pacific Islander</label>
 			<label><input type="radio" name="filter" value="Native American">Native American</label>
 			<label><input type="radio" name="filter" value="Declined">Declined</label>
@@ -52,6 +45,13 @@
 			<label><input type="radio" name="filter" value="Methadone">Methadone</label>
 			<label><input type="radio" name="filter" value="Community Based Organization">Community Clinic</label>
 		</fieldset>
+	</fieldset>
+	<fieldset class="type">
+		<legend>Group</legend>
+		<label><input type="radio" name="type" value="ethnicity">Ethnicity</label>
+		<label><input type="radio" name="type" value="gender">Gender</label>
+		<label><input type="radio" name="type" value="age">Age</label>
+		<label><input type="radio" name="type" value="site">Location Type</label>
 	</fieldset>
 </form>
 <div class="chart treemap">
