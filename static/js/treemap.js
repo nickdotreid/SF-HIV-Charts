@@ -1,15 +1,9 @@
 var color = d3.scale.category20c();
 $(document).ready(function(){
-	$("body").delegate(".navigation a.type","click",function(event){
-		event.preventDefault();
-		$(".navigation a.type.selected").removeClass("selected");
-		$(this).addClass("selected");
-		$.address.parameter("type", $(this).data("value"));
-	}).delegate(".navigation a.filter","click",function(event){
-		event.preventDefault();
-		$(".navigation a.filter.selected").removeClass("selected");
-		$(this).addClass("selected");
-		$.address.parameter("filter", $(this).data("value"));
+	$("body").delegate(".navigation .type input","click",function(event){
+		$.address.parameter("type", $(this).val());
+	}).delegate(".navigation .filter input","click",function(event){
+		$.address.parameter("filter", $(this).val());
 	}).delegate(".chart","draw",function(){		
 		chart = $(this);
 		div = chart.data("div");
@@ -67,7 +61,7 @@ $(document).ready(function(){
 		chart = $(this);
 		data = chart.data("data");
 		total = 0;
-		filter = $(".navigation a.selected.filter:first").data("value");
+		filter = $.address.parameter("filter");
 		if(!filter){
 			filter = 'size';
 		}
@@ -116,7 +110,7 @@ $.address.change(function(event){
 });
 
 function cell_size(d){
-	filter = $(".navigation a.selected.filter:first").data("value");
+	filter = $.address.parameter("filter");
 	if(!filter){
 		filter = 'size';
 	}
