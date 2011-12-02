@@ -14,7 +14,7 @@ age_groups = [
 
 @app.route('/')
 def index():
-	return render_template('treemap.html')
+	return render_template('index.html')
 	
 @app.route('/population')
 def population_map():
@@ -23,6 +23,10 @@ def population_map():
 @app.route('/bar')
 def bar_charts():
 	return render_template('barchart.html')
+	
+@app.route('/treemap')
+def testing_treemap():
+	return render_template('treemap.html')
 	
 @app.route('/data')
 def data():
