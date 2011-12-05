@@ -50,10 +50,6 @@ $(document).ready(function(event){
 			});
 		});
 	});
-	
-	$("form.navigation input").click(function(event){
-		$.address.parameter("filter",this.value);
-	});
 });
 
 function filter_key(){

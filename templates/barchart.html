@@ -15,14 +15,20 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$.address.parameter("type","ethnicity");
+	
+	$("form.controls .filter input").click(function(event){
+		$.address.parameter("filter",this.value);
+	});
 });
 </script>
 {% endblock %}
 {% block content %}
-<form class="navigation">
-	<label class="radio"><input name="filter" type="radio" value="Incidence" />New HIV Cases in 2010</label>
-	<label class="radio"><input name="filter" type="radio" value="Population" />2010 HIV+ Population</label>
-	<label class="radio"><input name="filter" type="radio" value="Census" />2010 Census Population</label>
+<form class="controls">
+	<fieldset class="filter">
+		<label class="radio"><input name="filter" type="radio" value="Incidence" />New HIV Cases in 2010</label>
+		<label class="radio"><input name="filter" type="radio" value="Population" />2010 HIV+ Population</label>
+		<label class="radio"><input name="filter" type="radio" value="Census" />2010 Census Population</label>
+	</fieldset>
 </form>
 <div class="chart barchart" data-duration="1500" data-ticks="6" data-csv="/static/data/2010PosPopCensus.csv"></div>
 {% endblock %}
