@@ -26,7 +26,7 @@ $(document).ready(function(event){
 		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return Number(d[filter_key()]); })]).range(["0px", chart.width()+"px"]);				
 		d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){
 			return x(Number(d[filter_key()]));
-		});
+		}).text(function(d){ return addCommas(d[filter_key()]); });
 		ticks = x.ticks(chart.data("ticks"));
 		$(".rule .tick",chart).each(function(i){
 			tick = $(this);
@@ -34,16 +34,17 @@ $(document).ready(function(event){
 			tick.stop();
 			if(ticks[i] == undefined){
 				tick.animate({
-					"left":chart.width()+tick.width()+'px'
+					"left":chart.width()+tick.width()+'px',
+					"opacity":0
 				},{
-					"duration":duration,
-					queue:false
+					"duration":duration
 				});
 				return false;
 			}
 			tick.html(addCommas(ticks[i]));
 			tick.animate({
-				"left":x(Number(ticks[i]))
+				"left":x(Number(ticks[i])),
+				"opacity":1
 			},{
 				"duration":duration
 			});

@@ -20,9 +20,9 @@ $(document).ready(function(){
 {% endblock %}
 {% block content %}
 <form class="navigation">
-	<label class="radio"><input name="filter" type="radio" value="Incidence" />Incidence</label>
-	<label class="radio"><input name="filter" type="radio" value="Population" />Population</label>
-	<label class="radio"><input name="filter" type="radio" value="Census" />Census</label>
+	<label class="radio"><input name="filter" type="radio" value="Incidence" />New HIV Cases in 2010</label>
+	<label class="radio"><input name="filter" type="radio" value="Population" />2010 HIV+ Population</label>
+	<label class="radio"><input name="filter" type="radio" value="Census" />2010 Census Population</label>
 </form>
 <div class="chart barchart" data-duration="1500" data-ticks="6" data-csv="/static/data/2010PosPopCensus.csv"></div>
 {% endblock %}

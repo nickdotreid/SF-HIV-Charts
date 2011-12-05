@@ -14,6 +14,8 @@
 	position:absolute;
 	bottom:5px;
 	left:0px;
+	text-align:right;
+	text-shadow:1px 1px 2px #FFFFFF,1px 1px 2px #FFFFFF,-1px -1px 2px #FFFFFF;
 }
 
 .barchart .rule{
