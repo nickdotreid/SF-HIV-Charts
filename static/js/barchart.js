@@ -4,6 +4,12 @@ $(document).ready(function(event){
 		d3.csv(chart.data("csv"),function(data){
 			chart.data("type","ethnicity");
 			chart.data("data",data);
+			if(chart.data('ticks')){
+				chart.prepend('<div class="rule"></div>');
+				for(var i=0;i<chart.data("ticks");i++){
+					$('.rule',chart).append('<div class="tick"></chart>');
+				}
+			}
 			barchart = d3.select(".barchart");
 			barchart.selectAll("div.bar")
 				.data(data)
@@ -14,11 +20,33 @@ $(document).ready(function(event){
 			chart.trigger("draw");
 		});
 	}).bind("draw",function(event){
-		data = $(this).data("data");
-		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return Number(d[filter_key()]); })]).range(["0px", chart.width()+"px"]);
-		
-		d3.selectAll(".barchart .line").transition().duration(500).style("width",function(d){
+		chart = $(this);
+		data = chart.data("data");
+		duration = chart.data("duration");
+		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return Number(d[filter_key()]); })]).range(["0px", chart.width()+"px"]);				
+		d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){
 			return x(Number(d[filter_key()]));
+		});
+		ticks = x.ticks(chart.data("ticks"));
+		$(".rule .tick",chart).each(function(i){
+			tick = $(this);
+			tick.height(chart.height());
+			tick.stop();
+			if(ticks[i] == undefined){
+				tick.animate({
+					"left":chart.width()+tick.width()+'px'
+				},{
+					"duration":duration,
+					queue:false
+				});
+				return false;
+			}
+			tick.html(addCommas(ticks[i]));
+			tick.animate({
+				"left":x(Number(ticks[i]))
+			},{
+				"duration":duration
+			});
 		});
 	});
 	

@@ -1,5 +1,28 @@
+.barchart{
+	position:relative;
+	overflow:hidden;
+}
+
 .barchart .bar{
-	height:20px;
-	width:20px;
+	position:relative;
+	padding:0px 0px 30px;
+}
+
+.barchart .line{
+	height:25px;
 	background:#469bdc;
+	position:absolute;
+	bottom:5px;
+	left:0px;
+}
+
+.barchart .rule{
+	position:relative;
+	height:30px;
+}
+.barchart .rule .tick{
+	position:absolute;
+	top:0px;
+	left:0px;
+	border-left:1px #000 solid;
 }
