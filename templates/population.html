@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="/static/css/barchart.css" />
+{% endblock %}
+
 {% block scripts %}
 	{{super()}}
 	<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
@@ -7,6 +12,44 @@
 	<script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
 	<script type="text/javascript" src="/static/js/d3/d3.csv.min.js"></script>
 	<script type="text/javascript" src="/static/js/barchart.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$.address.parameter("type","ethnicity");
+
+		$("form.controls .filter input").click(function(event){
+			$.address.parameter("filter",this.value);
+		});
+		$("form.controls .total input").click(function(event){
+			$.address.parameter("total",this.value);
+		});
+		$("#demographic").click(function(){
+			if(this.checked){
+				$.address.parameter("demographic",this.value);
+			}else{
+				$.address.parameter("demographic","");
+			}
+		});
+		
+		$("#scale").click(function(){
+			if(this.checked){
+				$.address.parameter("scale",this.value);
+			}else{
+				$.address.parameter("scale","");
+			}
+		});
+	});
+	
+	function return_number(d){
+		amount = Number(d[$.address.parameter("filter")]);
+		total = Number(d[$.address.parameter("total")]);
+		if(!$.address.parameter("demographic") || $.address.parameter("total")==""){
+			total=$(".barchart").data("data")[0][$.address.parameter("total")];
+		}
+		
+		return (amount/total)*100;
+	}
+	
+	</script>
 {% endblock %}
 
 
@@ -16,7 +59,7 @@
 		<label><input type="radio" name="filter" value="Incidence" />New Infections</label>
 		<label><input type="radio" name="filter" value="Population" />Positive Population</label>
 	</fieldset>
-	<fieldset class="overall">
+	<fieldset class="total">
 		<label><input type="radio" name="overall" value="Population" />Positive Population</label>
 		<label><input type="radio" name="overall" value="Census" />SF Population</label>
 	</fieldset>

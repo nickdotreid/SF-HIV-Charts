@@ -23,9 +23,12 @@ $(document).ready(function(event){
 		chart = $(this);
 		data = chart.data("data");
 		duration = chart.data("duration");
-		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return Number(d[filter_key()]); })]).range(["0px", chart.width()+"px"]);				
+		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return return_number(d); })]).range(["0px", chart.width()+"px"]);
+		if(!$.address.parameter("scale") || $.address.parameter("scale")==""){
+			var x = d3.scale.linear().domain([0, 100]).range(["0px", chart.width()+"px"]);
+		}
 		d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){
-			return x(Number(d[filter_key()]));
+			return x(return_number(d));
 		}).text(function(d){ return addCommas(d[filter_key()]); });
 		ticks = x.ticks(chart.data("ticks"));
 		$(".rule .tick",chart).each(function(i){
@@ -51,6 +54,10 @@ $(document).ready(function(event){
 		});
 	});
 });
+
+function return_number(d){
+	return Number(d[filter_key()]);
+}
 
 function filter_key(){
 	if(!$.address.parameter("filter") || $.address.parameter("filter")==""){
