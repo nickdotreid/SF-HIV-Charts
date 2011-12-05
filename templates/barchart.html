@@ -1,15 +1,28 @@
 {% extends 'layout.html' %}
 
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="/static/css/barchart.css" />
+{% endblock %}
+
 {% block scripts %}
 {{super()}}
-<script src="/static/js/load.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.csv.min.js"></script>
 <script type="text/javascript" src="/static/js/barchart.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".chart").trigger("load");
+	$.address.parameter("type","ethnicity");
 });
 </script>
 {% endblock %}
 {% block content %}
-<div class="chart" data-src="/data"></div>
+<form class="navigation">
+	<label class="radio"><input name="filter" type="radio" value="Incidence" />Incidence</label>
+	<label class="radio"><input name="filter" type="radio" value="Population" />Population</label>
+	<label class="radio"><input name="filter" type="radio" value="Census" />Census</label>
+</form>
+<div class="chart barchart" data-csv="/static/data/2010PosPopCensus.csv"></div>
 {% endblock %}
