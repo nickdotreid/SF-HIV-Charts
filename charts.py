@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, jsonify
 from models import *
 
 app = Flask(__name__)
+app.config.from_envvar('SFHIV_TESTREQ_SETTINGS')
 
 age_groups = [
 	{'min':0,'max':12,'name':'0-12'},
