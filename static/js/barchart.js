@@ -4,7 +4,7 @@ $(document).ready(function(event){
 		d3.csv(chart.data("csv"),function(data){
 			chart.data("type","ethnicity");
 			chart.data("data",data);
-			if(chart.data('ticks')){
+			if(chart.data('ticks') && $(".rule",chart).length < 1){
 				chart.prepend('<div class="rule"></div>');
 			}
 			barchart = d3.select(".barchart");

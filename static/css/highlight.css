@@ -1,0 +1,8 @@
+.chart .highlight{
+	display:block;
+	background:#FFF;
+	border:2px #000 solid;
+	border-radius:7px;
+	width:200px;
+	position:absolute;
+}
