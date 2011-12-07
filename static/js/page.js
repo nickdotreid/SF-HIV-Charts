@@ -15,3 +15,29 @@ function addCommas(nStr)
 	}
 	return x1 + x2;
 }
+
+function format_number(num){
+	if($(".chart").hasClass("percent")){
+		return num+"%";
+	}
+	return addCommas(num);
+}
+
+function rotate_data(data){
+	new_data = {};
+	for(index in data){
+		for(category in data[index]){
+			if(!new_data[category]){
+				new_data[category] = {"Category":category};
+			}
+			new_data[category][data[index]['Category']] = data[index][category]
+		}
+	}
+	data = [];
+	for(category in new_data){
+		if(category!="Category"){
+			data.push(new_data[category]);
+		}
+	}
+	return data;
+}
