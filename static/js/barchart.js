@@ -6,9 +6,6 @@ $(document).ready(function(event){
 			chart.data("data",data);
 			if(chart.data('ticks')){
 				chart.prepend('<div class="rule"></div>');
-				for(var i=0;i<chart.data("ticks");i++){
-					$('.rule',chart).append('<div class="tick"></chart>');
-				}
 			}
 			barchart = d3.select(".barchart");
 			barchart.selectAll("div.bar")
@@ -31,23 +28,23 @@ $(document).ready(function(event){
 			return x(return_number(d));
 		}).text(function(d){ return addCommas(d[filter_key()]); });
 		ticks = x.ticks(chart.data("ticks"));
+		for(index in ticks){
+			if($(".rule .tick."+ticks[index]).length < 1){
+				$(".rule").append('<div class="tick '+ticks[index]+'" data-value="'+ticks[index]+'"></div>');
+			}
+		}
 		$(".rule .tick",chart).each(function(i){
 			tick = $(this);
 			tick.height(chart.height());
 			tick.stop();
-			if(ticks[i] == undefined){
-				tick.animate({
-					"left":chart.width()+tick.width()+'px',
-					"opacity":0
-				},{
-					"duration":duration
-				});
-				return false;
+			opacity = 0;
+			if(ticks.indexOf(tick.data("value"))!=-1){
+				opacity = 1;
 			}
-			tick.html(addCommas(ticks[i]));
+			tick.html(addCommas(tick.data("value")));
 			tick.animate({
-				"left":x(Number(ticks[i])),
-				"opacity":1
+				"left":x(Number(tick.data("value"))),
+				"opacity":opacity
 			},{
 				"duration":duration
 			});
