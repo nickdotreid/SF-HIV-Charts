@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="/static/css/barchart.css" />
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.csv.min.js"></script>
+<script type="text/javascript" src="/static/js/barchart.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.address.parameter("type","ethnicity");
+	
+	$("form.controls .filter input").click(function(event){
+		$.address.parameter("filter",this.value);
+	});
+	$("#scale").click(function(){
+		if(this.checked){
+			$.address.parameter("scale",this.value);
+		}else{
+			$.address.parameter("scale","");
+		}
+	});
+});
+</script>
+{% endblock %}
+{% block content %}
+<form class="controls">
+	<fieldset class="filter">
+		<label class="radio"><input name="filter" type="radio" value="Male" />Male</label>
+		<label class="radio"><input name="filter" type="radio" value="Female" />Female</label>
+		<label class="radio"><input name="filter" type="radio" value="Transgender" />Transgender</label>
+		<label class="radio"><input name="filter" type="radio" value="White" />White</label>
+		<label class="radio"><input name="filter" type="radio" value="African American" />African American</label>
+		<label class="radio"><input name="filter" type="radio" value="Latino" />Latino</label>
+		<label class="radio"><input name="filter" type="radio" value="Asian" />Asian</label>
+		<label class="radio"><input name="filter" type="radio" value="Native American" />Native American</label>
+		<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
+		<label class="radio"><input name="filter" type="radio" value="MSM" />MSM</label>
+		<label class="radio"><input name="filter" type="radio" value="IDU" />IDU</label>
+		<label class="radio"><input name="filter" type="radio" value="MSM IDU" />MSM IDU</label>
+		<label class="radio"><input name="filter" type="radio" value="Hetrosexual" />Hetrosexual</label>
+		<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
+	</fieldset>
+	<label><input id="scale" type="checkbox" />Modify Scale</label>
+</form>
+<div class="chart barchart" data-duration="1500" data-ticks="6" data-csv="/static/data/AIDSCasesRegional.csv"></div>
+{% endblock %}

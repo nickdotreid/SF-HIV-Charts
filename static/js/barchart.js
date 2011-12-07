@@ -63,7 +63,7 @@ function filter_key(){
 	if(!$.address.parameter("filter") || $.address.parameter("filter")==""){
 		return 'Population';
 	}
-	return $.address.parameter("filter");
+	return unescape($.address.parameter("filter"));
 }
 
 $.address.change(function(event){

@@ -20,6 +20,10 @@ def index():
 @app.route('/trends')
 def sf_trends():
 	return render_template('sf_trends.html')
+
+@app.route('/regional')
+def regional():
+	return render_template('regional.html')
 	
 @app.route('/population')
 def population_map():
