@@ -16,6 +16,10 @@ age_groups = [
 @app.route('/')
 def index():
 	return render_template('index.html')
+
+@app.route('/trends')
+def sf_trends():
+	return render_template('sf_trends.html')
 	
 @app.route('/population')
 def population_map():

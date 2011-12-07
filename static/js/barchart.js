@@ -24,7 +24,7 @@ $(document).ready(function(event){
 		data = chart.data("data");
 		duration = chart.data("duration");
 		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return return_number(d); })]).range(["0px", chart.width()+"px"]);
-		if(!$.address.parameter("scale") || $.address.parameter("scale")==""){
+		if($("#scale").length>0 && (!$.address.parameter("scale") || $.address.parameter("scale")=="")){
 			var x = d3.scale.linear().domain([0, 100]).range(["0px", chart.width()+"px"]);
 		}
 		d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){
