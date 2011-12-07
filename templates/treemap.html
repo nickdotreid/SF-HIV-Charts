@@ -12,6 +12,19 @@
 {% endblock %}
 {% block content %}
 <form class="navigation">
+	<fieldset class="type">
+		<legend>Group</legend>
+		<label><input type="radio" name="type" value="ethnicity">Ethnicity</label>
+		<label><input type="radio" name="type" value="gender">Gender</label>
+		<label><input type="radio" name="type" value="age">Age</label>
+		<label><input type="radio" name="type" value="site">Location Type</label>
+	</fieldset>
+</form>
+<div class="chart treemap">
+	<div class="total">Showing <span class="number"></span><span class="filter"></span> HIV Tests</div>
+	<div class="map"></div>
+</div>
+<form class="navigation">
 	<fieldset class="filter">
 		<legend>View only group</legend>
 		<label><input type="radio" name="filter" value="size">View All</label>
@@ -32,7 +45,7 @@
 			<label><input type="radio" name="filter" value="Trans">Trans</label>
 		</fieldset>
 		<fieldset class="age">
-			<legend>age</legend>
+			<legend>Age</legend>
 			<label><input type="radio" name="filter" value="0-12">0 to 12</label>
 			<label><input type="radio" name="filter" value="13-19">13 to 19</label>
 			<label><input type="radio" name="filter" value="20-29">20 to 29</label>
@@ -46,18 +59,7 @@
 			<label><input type="radio" name="filter" value="Community Based Organization">Community Clinic</label>
 		</fieldset>
 	</fieldset>
-	<fieldset class="type">
-		<legend>Group</legend>
-		<label><input type="radio" name="type" value="ethnicity">Ethnicity</label>
-		<label><input type="radio" name="type" value="gender">Gender</label>
-		<label><input type="radio" name="type" value="age">Age</label>
-		<label><input type="radio" name="type" value="site">Location Type</label>
-	</fieldset>
 </form>
-<div class="chart treemap">
-	<div class="total">Showing <span class="number"></span><span class="filter"></span> HIV Tests</div>
-	<div class="map"></div>
-</div>
 {% endblock %}
 
 {% block templates %}
