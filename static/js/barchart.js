@@ -1,7 +1,13 @@
 $(document).ready(function(event){
 	$(".chart").bind("loadr",function(event){
 		chart = $(this);
+		if(!chart.parent().hasClass("container")){
+			chart.wrap("<div class='container'></div>")
+		}
 		d3.csv(chart.data("csv"),function(data){
+			if(chart.data("rotate")){
+				data = rotate_data(data);
+			}
 			chart.data("type","ethnicity");
 			chart.data("data",data);
 			if(chart.data('ticks') && $(".rule",chart).length < 1){
@@ -26,10 +32,10 @@ $(document).ready(function(event){
 		}
 		d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){
 			return x(return_number(d));
-		}).text(function(d){ return addCommas(d[filter_key()]); });
+		});
 		ticks = x.ticks(chart.data("ticks"));
 		for(index in ticks){
-			if($(".rule .tick."+ticks[index]).length < 1){
+			if($(".rule .tick[data-value='"+ticks[index]+"']").length < 1){
 				$(".rule").append('<div class="tick '+ticks[index]+'" data-value="'+ticks[index]+'"></div>');
 			}
 		}
@@ -41,7 +47,7 @@ $(document).ready(function(event){
 			if(ticks.indexOf(tick.data("value"))!=-1){
 				opacity = 1;
 			}
-			tick.html(addCommas(tick.data("value")));
+			tick.html(format_number(tick.data("value")));
 			tick.animate({
 				"left":x(Number(tick.data("value"))),
 				"opacity":opacity

@@ -2,10 +2,26 @@
 	position:relative;
 	overflow:hidden;
 }
+.container{
+	overflow:hidden;
+	padding:0px 0px 0px 70px;
+}
+.container .barchart{
+	overflow:visible;
+}
+
+.barchart .bar .title{
+	position:absolute;
+	left:-70px;
+	width:65px;
+	text-align:right;
+	line-height:0.7em;
+	font-size:0.8em;
+}
 
 .barchart .bar{
 	position:relative;
-	padding:0px 0px 30px;
+	height:30px;
 }
 
 .barchart .line{

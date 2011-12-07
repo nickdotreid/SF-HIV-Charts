@@ -25,9 +25,13 @@ def sf_trends():
 def regional():
 	return render_template('regional.html')
 	
-@app.route('/population')
+@app.route('/population/config')
 def population_map():
 	return render_template('population.html')
+	
+@app.route('/population')
+def population_simple_map():
+	return render_template('population_simple.html')
 	
 @app.route('/bar')
 def bar_charts():
