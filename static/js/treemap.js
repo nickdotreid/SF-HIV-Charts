@@ -9,10 +9,11 @@ $(document).ready(function(){
 		div = chart.data("div");
 		treemap = chart.data("treemap");
 		
-		div.selectAll("div")
+		div.selectAll(".cell")
 			.data(treemap.value(cell_size))
 			.transition().duration(1500)
 			.call(cell);
+		div.selectAll(".number").text(cell_text);
 		chart.trigger("update");
 	}).delegate(".chart","loadr",function(){
 		chart = $(this);
@@ -42,6 +43,7 @@ $(document).ready(function(){
 						.style("background",function(d){ return color(d.name);})
 						.call(cell)
 						.text(function(d){ return d.children ? null :d.name; });
+				div.selectAll('.cell').append("div").attr("class","number").text(cell_text);
 				chart.data({'div':div,'treemap':treemap})
 					.trigger("update");
 			}
@@ -58,21 +60,7 @@ $(document).ready(function(){
 		}
 		
 	}).delegate(".chart","update_total",function(){
-		chart = $(this);
-		data = chart.data("data");
-		total = 0;
-		filter = unescape($.address.parameter("filter"));
-		if(!filter){
-			filter = 'size';
-		}
-		for(node in data['children']){
-			val = data['children'][node][filter];
-			if(!val){
-				val = 0;
-			}
-			total += val;
-		}
-		chart.data("total",total);
+		chart.data("total",get_total(this));
 	}).delegate(".chart","loading",function(){
 		chart = $(this);
 		$(".map div").animate({
@@ -109,6 +97,15 @@ $.address.change(function(event){
 	chart.data("load_delay",setTimeout('chart.trigger("loadr");',200))
 });
 
+function cell_text(d){
+	if(d['children']){
+		return "";
+	}
+	number = d[unescape($.address.parameter("filter"))];
+	total = get_total($(this).parents('.chart')[0]);
+	return format_percent((number/total)*100)+'%';
+}
+
 function cell_size(d){
 	filter = unescape($.address.parameter("filter"));
 	if(!filter){
@@ -120,6 +117,24 @@ function cell_size(d){
 	}
 	
 	return val;
+}
+
+function get_total(chart){
+	chart = $(chart);
+	data = chart.data("data");
+	total = 0;
+	filter = unescape($.address.parameter("filter"));
+	if(!filter){
+		filter = 'size';
+	}
+	for(node in data['children']){
+		val = data['children'][node][filter];
+		if(!val){
+			val = 0;
+		}
+		total += val;
+	}
+	return total;
 }
 
 function cell() {
