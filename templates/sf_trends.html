@@ -3,7 +3,11 @@
 {% block styles %}
 {{super()}}
 <link rel="stylesheet" href="/static/css/barchart.css" />
-<link rel="stylesheet" href="/static/css/xychart.css" />
+<style type="text/css">
+body .barchart.horizontal .bar{
+	width:55px;
+}
+</style>
 {% endblock %}
 
 {% block scripts %}
@@ -12,7 +16,7 @@
 <script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
 <script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
 <script type="text/javascript" src="/static/js/d3/d3.csv.min.js"></script>
-<script type="text/javascript" src="/static/js/xychart.js"></script>
+<script type="text/javascript" src="/static/js/barchart.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$.address.parameter("type","ethnicity");
@@ -25,5 +29,5 @@ $(document).ready(function(){
 </script>
 {% endblock %}
 {% block content %}
-<div class="chart barchart xychart" data-duration="1500" data-ticks="6" data-csv="/static/data/CumulativeAIDSCases.csv"></div>
+<div class="chart barchart horizontal" data-duration="1500" data-ticks="6" data-csv="/static/data/CumulativeAIDSCases.csv"></div>
 {% endblock %}

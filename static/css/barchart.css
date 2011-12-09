@@ -4,7 +4,7 @@
 }
 .container{
 	overflow:hidden;
-	padding:0px 0px 70px 70px;
+	padding:70px;
 }
 .container .barchart{
 	overflow:visible;
@@ -78,4 +78,12 @@
 .barchart.horizontal .rule .tick{
 	border-left:0px;
 	border-top:1px #000 solid;
+	top:400px;
+}
+
+.barchart .number{
+	position:absolute;
+	left:0px;
+	top:0px;
+	text-align:center;
 }
