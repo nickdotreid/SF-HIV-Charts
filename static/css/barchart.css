@@ -90,3 +90,8 @@
 	width:40px;
 	font-size:0.7em;
 }
+
+.barchart .hover .number{
+	color:#000;
+	font-size:1em;
+}

@@ -17,7 +17,7 @@ $(document).ready(function(event){
 			barchart.selectAll("div.bar")
 				.data(data)
 				.enter().append("div")
-					.attr("class","bar")
+					.attr("class","bar hoverable")
 					.append("div").attr("class","title").text(function(d){ return d.Category; });
 			if(chart.hasClass("horizontal")){
 				d3.selectAll(".barchart .bar").append("div").attr("class","line").style("height",0);
