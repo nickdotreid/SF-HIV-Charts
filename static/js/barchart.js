@@ -38,7 +38,7 @@ $(document).ready(function(event){
 		}
 		
 		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return return_number(d); })]).range(["0px", width+"px"]);
-		if($("#scale").length>0 && (!$.address.parameter("scale") || $.address.parameter("scale")=="")){
+		if(chart.hasClass("percent") && $("#scale").length>0 && (!$.address.parameter("scale") || $.address.parameter("scale")=="")){
 			var x = d3.scale.linear().domain([0, 100]).range(["0px", width+"px"]);
 		}
 		if(horizontal){
