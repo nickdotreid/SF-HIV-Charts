@@ -19,20 +19,34 @@ $(document).ready(function(event){
 				.enter().append("div")
 					.attr("class","bar")
 					.append("div").attr("class","title").text(function(d){ return d.Category; });
-			d3.selectAll(".barchart .bar").append("div").attr("class","line").style("width",0);
+			if(chart.hasClass("horizontal")){
+				d3.selectAll(".barchart .bar").append("div").attr("class","line").style("height",0);
+			}else{
+				d3.selectAll(".barchart .bar").append("div").attr("class","line").style("width",0);
+			}
 			chart.trigger("draw");
 		});
 	}).bind("draw",function(event){
 		chart = $(this);
 		data = chart.data("data");
 		duration = chart.data("duration");
-		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return return_number(d); })]).range(["0px", chart.width()+"px"]);
-		if($("#scale").length>0 && (!$.address.parameter("scale") || $.address.parameter("scale")=="")){
-			var x = d3.scale.linear().domain([0, 100]).range(["0px", chart.width()+"px"]);
+		
+		horizontal = chart.hasClass("horizontal");
+		width = chart.width();
+		if(horizontal){
+			width = chart.height();
 		}
-		d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){
-			return x(return_number(d));
-		});
+		
+		var x = d3.scale.linear().domain([0, d3.max(data,function(d){ return return_number(d); })]).range(["0px", width+"px"]);
+		if($("#scale").length>0 && (!$.address.parameter("scale") || $.address.parameter("scale")=="")){
+			var x = d3.scale.linear().domain([0, 100]).range(["0px", width+"px"]);
+		}
+		if(horizontal){
+			d3.selectAll(".barchart .line").transition().duration(duration).style("height",function(d){ return x(return_number(d));});
+		}else{
+			d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){ return x(return_number(d));});
+		}
+		
 		ticks = x.ticks(chart.data("ticks"));
 		for(index in ticks){
 			if($(".rule .tick[data-value='"+ticks[index]+"']").length < 1){
@@ -41,19 +55,34 @@ $(document).ready(function(event){
 		}
 		$(".rule .tick",chart).each(function(i){
 			tick = $(this);
-			tick.height(chart.height());
 			tick.stop();
-			opacity = 0;
-			if(ticks.indexOf(tick.data("value"))!=-1){
-				opacity = 1;
+			if(horizontal){
+				tick.width(chart.width());
+				opacity = 0;
+				if(ticks.indexOf(tick.data("value"))!=-1){
+					opacity = 1;
+				}
+				tick.html(format_number(tick.data("value")));
+				tick.animate({
+					"top":(400-Number(x(Number(tick.data("value"))).replace('px','')))+'px',
+					"opacity":opacity
+				},{
+					"duration":duration
+				});
+			}else{
+				tick.height(chart.height());
+				opacity = 0;
+				if(ticks.indexOf(tick.data("value"))!=-1){
+					opacity = 1;
+				}
+				tick.html(format_number(tick.data("value")));
+				tick.animate({
+					"left":x(Number(tick.data("value"))),
+					"opacity":opacity
+				},{
+					"duration":duration
+				});
 			}
-			tick.html(format_number(tick.data("value")));
-			tick.animate({
-				"left":x(Number(tick.data("value"))),
-				"opacity":opacity
-			},{
-				"duration":duration
-			});
 		});
 	});
 });

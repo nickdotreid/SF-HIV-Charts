@@ -4,7 +4,7 @@
 }
 .container{
 	overflow:hidden;
-	padding:0px 0px 0px 70px;
+	padding:0px 0px 70px 70px;
 }
 .container .barchart{
 	overflow:visible;
@@ -43,4 +43,39 @@
 	top:0px;
 	left:0px;
 	border-left:1px #000 solid;
+}
+
+
+.barchart.horizontal{
+	height:400px;
+}
+.barchart.horizontal .bar{
+	width:80px;
+	height:400px;
+	float:left;
+}
+.barchart.horizontal .line{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:40px;
+}
+.barchart.horizontal .title{
+	position:absolute;
+	top:410px;
+	left:0px;
+	width:80px;
+	text-align:left;
+}
+
+.barchart.horizontal .rule{
+	position:absolute;
+	left:-70px;
+	top:0px;
+	width:100%;
+}
+
+.barchart.horizontal .rule .tick{
+	border-left:0px;
+	border-top:1px #000 solid;
 }
