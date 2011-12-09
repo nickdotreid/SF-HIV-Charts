@@ -19,6 +19,10 @@ def index():
 
 @app.route('/trends')
 def sf_trends():
+	return render_template('sf_trends_rotate.html')
+	
+@app.route('/trends/detail')
+def sf_trends():
 	return render_template('sf_trends.html')
 
 @app.route('/regional')

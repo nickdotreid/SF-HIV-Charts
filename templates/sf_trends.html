@@ -21,13 +21,24 @@ body .barchart.horizontal .bar{
 $(document).ready(function(){
 	$.address.parameter("type","ethnicity");
 	
-	$(".xychart").delegate("a.title","click",function(event){
-		event.preventDefault();
-		$.address.parameter("filter",$(this).data("value"));
+	$("form").delegate("input","click",function(event){
+		$.address.parameter("filter",this.value);
 	});
 });
 </script>
 {% endblock %}
 {% block content %}
 <div class="chart barchart horizontal" data-duration="1500" data-ticks="6" data-csv="/static/data/CumulativeAIDSCases.csv"></div>
+<form>
+<fieldset class="ethnicity">
+	<legend>Year</legend>
+	<label><input type="radio" name="filter" value="2004">2004</label>
+	<label><input type="radio" name="filter" value="2005">2005</label>
+	<label><input type="radio" name="filter" value="2006">2006</label>
+	<label><input type="radio" name="filter" value="2007">2007</label>
+	<label><input type="radio" name="filter" value="2008">2008</label>
+	<label><input type="radio" name="filter" value="2009">2009</label>
+	<label><input type="radio" name="filter" value="2010">2010</label>
+</fieldset>
+</form>
 {% endblock %}

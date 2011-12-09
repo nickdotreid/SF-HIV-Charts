@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="/static/css/barchart.css" />
+<style type="text/css">
+body .barchart.horizontal .bar{
+	width:55px;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.csv.min.js"></script>
+<script type="text/javascript" src="/static/js/barchart.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.address.parameter("type","ethnicity");
+	
+	$("form").delegate("input","click",function(event){
+		$.address.parameter("filter",this.value);
+	});
+});
+</script>
+{% endblock %}
+{% block content %}
+<div class="chart barchart horizontal" data-rotate="yes" data-duration="1500" data-ticks="6" data-csv="/static/data/CumulativeAIDSCases.csv"></div>
+<form>
+<fieldset class="ethnicity">
+	<legend>Ethnicity</legend>
+	<label><input type="radio" name="filter" value="White">White</label>
+	<label><input type="radio" name="filter" value="African American">African American</label>
+	<label><input type="radio" name="filter" value="Latino">Hispanic/Latino</label>
+	<label><input type="radio" name="filter" value="Asian/Pacific Islander">Asian/Pacific Islander</label>
+	<label><input type="radio" name="filter" value="Native American">Native American</label>
+	<label><input type="radio" name="filter" value="Declined">Declined</label>
+	<label><input type="radio" name="filter" value="Other">Other</label>
+</fieldset>
+<fieldset class="gender">
+	<legend>Gender</legend>
+	<label><input type="radio" name="filter" value="Male">Male</label>
+	<label><input type="radio" name="filter" value="Female">Female</label>
+	<label><input type="radio" name="filter" value="Transgender">Trans</label>
+</fieldset>
+<fieldset class="risk">
+	<legend>Risk Category</legend>
+	<label><input type="radio" name="filter" value="MSM">MSM</label>
+	<label><input type="radio" name="filter" value="IDU">IDU</label>
+	<label><input type="radio" name="filter" value="MSM IDU">MSM IDU</label>
+	<label><input type="radio" name="filter" value="Heterosexual">Heterosexual</label>
+	<label><input type="radio" name="filter" value="Other/Unidentified">Other/Unidentified</label>
+</fieldset>
+</form>
+{% endblock %}
