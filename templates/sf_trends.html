@@ -21,16 +21,62 @@ body .barchart.horizontal .bar{
 $(document).ready(function(){
 	$.address.parameter("type","ethnicity");
 	
-	$("form").delegate("input","click",function(event){
+	$("form").delegate(".type input","click",function(event){
+		$.address.parameter("type",this.value);
+		$(".chart").html("").trigger("loadr");
+	});
+	
+	$("form").delegate(".year input","click",function(event){
 		$.address.parameter("filter",this.value);
 	});
 });
+
+function filter_data(data){
+	new_data = [];
+	for(index in data){
+		if($.address.parameter("type")=='ethnicity'){
+			switch(data[index]['Category']){
+				case "White":
+				case "African American":
+				case "Latino":
+				case "Asian/Pacific Islander":
+				case "Native American":
+					new_data.push(data[index]);
+			}
+		}
+		if($.address.parameter("type")=='gender'){
+			switch(data[index]['Category']){
+				case "Male":
+				case "Female":
+				case "Transgender":
+					new_data.push(data[index]);
+			}
+		}
+		if($.address.parameter("type")=='risk'){
+			switch(data[index]['Category']){
+				case "MSM":
+				case "IDU":
+				case "MSM IDU":
+				case "Heterosexual":
+				case "Other/Unidentified":
+					new_data.push(data[index]);
+			}			
+		}
+	}
+	return new_data;
+}
+
 </script>
 {% endblock %}
 {% block content %}
 <div class="chart barchart horizontal" data-duration="1500" data-ticks="6" data-csv="/static/data/CumulativeAIDSCases.csv"></div>
 <form>
-<fieldset class="ethnicity">
+<fieldset class="type">
+	<label><input type="radio" name="type" value="ethnicity">Ethnicity</label>
+	<label><input type="radio" name="type" value="gender">Gender</label>
+	<label><input type="radio" name="type" value="risk">Risk Category</label>
+</fieldset>
+<fieldset class="year">
 	<legend>Year</legend>
 	<label><input type="radio" name="filter" value="2004">2004</label>
 	<label><input type="radio" name="filter" value="2005">2005</label>

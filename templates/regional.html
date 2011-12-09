@@ -32,20 +32,26 @@ $(document).ready(function(){
 {% block content %}
 <form class="controls">
 	<fieldset class="filter">
+		<fieldset>
 		<label class="radio"><input name="filter" type="radio" value="Male" />Male</label>
 		<label class="radio"><input name="filter" type="radio" value="Female" />Female</label>
 		<label class="radio"><input name="filter" type="radio" value="Transgender" />Transgender</label>
+		</fieldset>
+		<fieldset>
 		<label class="radio"><input name="filter" type="radio" value="White" />White</label>
 		<label class="radio"><input name="filter" type="radio" value="African American" />African American</label>
 		<label class="radio"><input name="filter" type="radio" value="Latino" />Latino</label>
 		<label class="radio"><input name="filter" type="radio" value="Asian" />Asian</label>
 		<label class="radio"><input name="filter" type="radio" value="Native American" />Native American</label>
 		<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
+		</fieldset>
+		<fieldset>
 		<label class="radio"><input name="filter" type="radio" value="MSM" />MSM</label>
 		<label class="radio"><input name="filter" type="radio" value="IDU" />IDU</label>
 		<label class="radio"><input name="filter" type="radio" value="MSM IDU" />MSM IDU</label>
 		<label class="radio"><input name="filter" type="radio" value="Hetrosexual" />Hetrosexual</label>
 		<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
+		</fieldset>
 	</fieldset>
 	<label><input id="scale" type="checkbox" />Modify Scale</label>
 </form>

@@ -10,6 +10,7 @@ $(document).ready(function(event){
 			}
 			chart.data("type","ethnicity");
 			chart.data("data",data);
+			data = filter_data(data);
 			if(chart.data('ticks') && $(".rule",chart).length < 1){
 				chart.prepend('<div class="rule"></div>');
 			}
@@ -91,6 +92,10 @@ $(document).ready(function(event){
 		});
 	});
 });
+
+function filter_data(data){
+	return data;
+}
 
 function return_number(d){
 	return Number(d[filter_key()]);
