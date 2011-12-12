@@ -37,6 +37,28 @@
 				$.address.parameter("scale","");
 			}
 		});
+		
+		$.address.change(function(event){
+			if($.address.parameter("scale") && $.address.parameter("scale")!=""){
+				$("#scale").attr("checked",true);
+			}else{
+				$("#scale").attr("checked",false);
+			}
+			
+			if($.address.parameter("demographic") && $.address.parameter("demographic")!=""){
+				$("#demographic").attr("checked",true);
+			}else{
+				$("#demographic").attr("checked",false);
+			}
+			
+			if($.address.parameter("filter") && $.address.parameter("filter")!=""){
+				$(".filter input[value='"+unescape($.address.parameter("filter"))+"']").attr("checked",true)
+			}
+			if($.address.parameter("total") && $.address.parameter("total")!=""){
+				$(".total input[value='"+unescape($.address.parameter("total"))+"']").attr("checked",true)
+			}
+
+		});
 	});
 	
 	function return_number(d){
