@@ -55,13 +55,18 @@ function return_number(d){
 {% block content %}
 <form class="controls">
 	<fieldset class="filter">
+		<legend>Pick an ethnicity to view</legend>
 		<label class="radio"><input name="filter" type="radio" value="White" />White</label>
 		<label class="radio"><input name="filter" type="radio" value="African American" />African American</label>
-		<label class="radio"><input name="filter" type="radio" value="Latino" />Latino</label>
+		<label class="radio"><input name="filter" type="radio" value="Latino" />Hispanic/Latino</label>
 		<label class="radio"><input name="filter" type="radio" value="Asian/Pacific Islander" />Asian/Pacific Islander</label>
 	</fieldset>
-	<label><input id="percent" type="checkbox" />As Percentage</label>
-	<label><input id="scale" type="checkbox" />Modify Scale</label>
+	<fieldset class="percent">
+		<legend>Adjust chart</legend>
+		<label><input id="percent" type="checkbox" />View metrics as percent of total population.</label>
+		<label class="percent only"><input id="scale" type="checkbox" />Zoom in</label>
+		<label class="no-percent only"><input id="no-census" type="checkbox" />Hide total San Francisco Population metric.</label>
+	</fieldset>
 </form>
 <div class="chart barchart percent horizontal" data-duration="1500" data-ticks="6" data-rotate="true" data-csv="/static/data/2010PopPercentages.csv"></div>
 {% endblock %}
