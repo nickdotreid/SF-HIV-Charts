@@ -18,7 +18,7 @@ def index():
 	return render_template('index.html')
 
 @app.route('/trends')
-def sf_trends():
+def sf_trends_rotate():
 	return render_template('sf_trends_rotate.html')
 	
 @app.route('/trends/detail')
