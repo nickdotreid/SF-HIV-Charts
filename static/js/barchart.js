@@ -19,7 +19,7 @@ $(document).ready(function(event){
 				.data(data)
 				.enter().append("div")
 					.attr("class","bar hoverable")
-					.append("div").attr("class","title").text(function(d){ return d.Category; });
+					.append("div").attr("class","title").text(function(d){ return better_label(d.Category); });
 			if(chart.hasClass("horizontal")){
 				d3.selectAll(".barchart .bar").append("div").attr("class","line").style("height",0);
 			}else{
@@ -118,3 +118,7 @@ $.address.change(function(event){
 	chart.trigger("loading");
 	chart.trigger("loadr");
 });
+
+function better_label(label){
+	return label;
+}
