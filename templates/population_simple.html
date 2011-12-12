@@ -86,6 +86,24 @@ function return_number(d){
 	return Math.round(d[unescape($.address.parameter("filter"))]/d['Total']*100);
 }
 
+function better_label(label){
+	for(key in labels){
+		if(key==label){
+			return labels[key]
+		}
+	}
+	return label;
+}
+
+var labels = {
+	'Census':'Population in San Francisco',
+	'Cumulative':'Cumulative HIV/AIDS cases in San Francisco',
+	'Living AIDS':'People living with AIDS',
+	'Living HIV':'People living with HIV, non-AIDS',
+	'Incidence':'New HIV infections',
+	'Tests':'Number of HIV tests'
+}
+
 </script>
 {% endblock %}
 
