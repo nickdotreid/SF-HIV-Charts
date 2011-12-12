@@ -52,19 +52,27 @@
 	</script>
 {% endblock %}
 
+{% block header %}
+<h1>2010 San Francisco Population Demographics by Ethnicity</h1>
+{% endblock %}
 
 {% block content %}
 <form class="controls">
 	<fieldset class="filter">
-		<label><input type="radio" name="filter" value="Incidence" />New Infections</label>
-		<label><input type="radio" name="filter" value="Population" />Positive Population</label>
+		<legend>View measurement</legend>
+		<label><input type="radio" name="filter" value="Incidence" />New HIV Infections</label>
+		<label><input type="radio" name="filter" value="Population" />HIV+ Population</label>
 	</fieldset>
 	<fieldset class="total">
-		<label><input type="radio" name="overall" value="Population" />Positive Population</label>
-		<label><input type="radio" name="overall" value="Census" />SF Population</label>
+		<legend>Measure against</legend>
+		<label><input type="radio" name="overall" value="Population" />HIV+ Population</label>
+		<label><input type="radio" name="overall" value="Census" />San Francisco Population</label>
 	</fieldset>
-	<label><input id="demographic" type="checkbox" />By Demographic</label>
-	<label><input id="scale" type="checkbox" />Modify Scale</label>
+	<fieldset>
+		<legend>Adjust graph</legend>
+		<label><input id="demographic" type="checkbox" />Compare ethnicities' to themselves</label>
+		<label><input id="scale" type="checkbox" />Zoom</label>
+	</fieldset>
 </form>
 <br style="clear:both;" />
 <div class="chart barchart percent horizontal" data-duration="1500" data-ticks="6" data-csv="/static/data/2010PosPopCensus.csv"></div>
