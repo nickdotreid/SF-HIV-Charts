@@ -17,6 +17,8 @@
 $(document).ready(function(){
 	$.address.parameter("type","ethnicity");
 	
+	$("form .only").hide();
+	
 	$("form.controls .filter input").click(function(event){
 		$.address.parameter("filter",this.value);
 	});
@@ -33,6 +35,24 @@ $(document).ready(function(){
 		}else{
 			$.address.parameter("scale","");
 		}
+	});
+	
+	$.address.change(function(event){
+		if($.address.parameter("percent") && $.address.parameter("percent")!=""){
+			$("#percent").attr("checked",true);
+		}else{
+			$("#percent").attr("checked",false);
+		}
+		if($.address.parameter("scale") && $.address.parameter("scale")!=""){
+			$("#scale").attr("checked",true);
+		}else{
+			$("#scale").attr("checked",false);
+		}
+		
+		if($.address.parameter("filter") && $.address.parameter("filter")!=""){
+			$("input[value='"+unescape($.address.parameter("filter"))+"']").attr("checked",true)
+		}
+		
 	});
 });
 
