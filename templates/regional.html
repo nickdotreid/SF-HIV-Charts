@@ -29,31 +29,47 @@ $(document).ready(function(){
 });
 </script>
 {% endblock %}
+
+{% block header %}
+<h1>Regional Differences in Cumulative HIV/AIDS Cases</h1>
+{% endblock %}
 {% block content %}
 <form class="controls">
 	<fieldset class="filter">
+		<legend>Select demographic to view</legend>
 		<fieldset>
-		<label class="radio"><input name="filter" type="radio" value="Male" />Male</label>
-		<label class="radio"><input name="filter" type="radio" value="Female" />Female</label>
-		<label class="radio"><input name="filter" type="radio" value="Transgender" />Transgender</label>
+			<legend>Gender</legend>
+			<label class="radio"><input name="filter" type="radio" value="Male" />Male</label>
+			<label class="radio"><input name="filter" type="radio" value="Female" />Female</label>
+			<label class="radio"><input name="filter" type="radio" value="Transgender" />Transgender</label>
 		</fieldset>
 		<fieldset>
-		<label class="radio"><input name="filter" type="radio" value="White" />White</label>
-		<label class="radio"><input name="filter" type="radio" value="African American" />African American</label>
-		<label class="radio"><input name="filter" type="radio" value="Latino" />Latino</label>
-		<label class="radio"><input name="filter" type="radio" value="Asian" />Asian</label>
-		<label class="radio"><input name="filter" type="radio" value="Native American" />Native American</label>
-		<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
+			<legend>Ethnicity</legend>
+			<label class="radio"><input name="filter" type="radio" value="White" />White</label>
+			<label class="radio"><input name="filter" type="radio" value="African American" />African American</label>
+			<label class="radio"><input name="filter" type="radio" value="Latino" />Latino</label>
+			<label class="radio"><input name="filter" type="radio" value="Asian" />Asian</label>
+			<label class="radio"><input name="filter" type="radio" value="Native American" />Native American</label>
+			<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
 		</fieldset>
 		<fieldset>
-		<label class="radio"><input name="filter" type="radio" value="MSM" />MSM</label>
-		<label class="radio"><input name="filter" type="radio" value="IDU" />IDU</label>
-		<label class="radio"><input name="filter" type="radio" value="MSM IDU" />MSM IDU</label>
-		<label class="radio"><input name="filter" type="radio" value="Hetrosexual" />Hetrosexual</label>
-		<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
+			<legend>Risk Category</legend>
+			<label class="radio"><input name="filter" type="radio" value="MSM" />MSM</label>
+			<label class="radio"><input name="filter" type="radio" value="IDU" />IDU</label>
+			<label class="radio"><input name="filter" type="radio" value="MSM IDU" />MSM IDU</label>
+			<label class="radio"><input name="filter" type="radio" value="Hetrosexual" />Hetrosexual</label>
+			<label class="radio"><input name="filter" type="radio" value="Other" />Other</label>
 		</fieldset>
 	</fieldset>
 	<label><input id="scale" type="checkbox" />Modify Scale</label>
 </form>
+<div class="legend">
+	<p class="label">Percentages represent number of HIV+ people in selected demographic out of total HIV+ population in a region.</p>
+</div>
 <div class="chart barchart percent horizontal" data-duration="1500" data-ticks="6" data-csv="/static/data/AIDSCasesRegional.csv"></div>
+{% endblock %}
+
+{% block footer %}
+<p>Data collected from page 1, table 1.1 of the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf" target="blank">2010 San Francisco AIDS/HIV Epidemiology Annual Report.</a></p>
+<p>All scores of "0" should be interpreted as unreported numbers, or percentages that are extremely small.</p>
 {% endblock %}

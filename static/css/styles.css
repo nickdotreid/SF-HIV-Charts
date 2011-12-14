@@ -74,9 +74,8 @@ a,a:visited{
 }
 
 .legend{
-	float:left;
-	width:300px;
-	margin:7px 0px;
+	margin:13px 0px 4px;
+	border:1px #CCC solid;
 }
 
 
