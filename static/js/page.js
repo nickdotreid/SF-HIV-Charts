@@ -16,8 +16,8 @@ function addCommas(nStr)
 	return x1 + x2;
 }
 
-function format_number(num){
-	if($(".chart").hasClass("percent")){
+function format_number(num,percent){
+	if(percent){
 		return format_percent(num)+"%";
 	}
 	return addCommas(num);

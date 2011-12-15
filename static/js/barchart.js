@@ -48,7 +48,7 @@ $(document).ready(function(event){
 		}else{
 			d3.selectAll(".barchart .line").transition().duration(duration).style("width",function(d){ return x(return_number(d));});
 		}
-		d3.selectAll(".barchart .line .number").text(function(d){ return format_number(return_number(d)); }).style("top",function(d){
+		d3.selectAll(".barchart .line .number").text(function(d){ return format_number(return_number(d),$(".chart").hasClass("percent")); }).style("top",function(d){
 			topr = 0 - $(this).height();
 			return topr+'px';
 		});
