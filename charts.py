@@ -40,10 +40,18 @@ def population_simple_map():
 @app.route('/bar')
 def bar_charts():
 	return render_template('barchart.html')
-	
-@app.route('/treemap')
+
+@app.route('/testing')
+def testing_bar():
+	return render_template('testing_bar.html')
+
+@app.route('/testing/treemap')
 def testing_treemap():
 	return render_template('treemap.html')
+	
+@app.route('/testing/circle')
+def testing_circle():
+	return render_template('testing_circle.html')
 	
 @app.route('/data')
 def data():
@@ -61,7 +69,9 @@ def data_treemap():
 	axis = 'ethnicity'
 	if request.method == 'POST' and 'axis' in request.form:
 		axis = request.form['axis']
+	tests = 0
 	for test in Test.query.all():
+		tests += 1
 		key = ""
 		if axis == 'ethnicity':
 			key = test.ethnicity
@@ -117,7 +127,7 @@ def data_treemap():
 	for result in results:
 		results[result]['name'] = result
 		ordered_results.append(results[result])
-	return jsonify({'name':'tests','children':ordered_results})
+	return jsonify({'total':tests,'name':'tests','children':ordered_results})
 	
 def add_or_increment(key,arr):
 	if key not in arr:
