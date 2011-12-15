@@ -100,8 +100,7 @@ var labels = {
 	'Cumulative':'Cumulative HIV/AIDS cases',
 	'Living AIDS':'People living with AIDS',
 	'Living HIV':'People living with HIV, non-AIDS',
-	'Incidence':'New HIV infections',
-	'Tests':'Number of HIV tests'
+	'Incidence':'New HIV diagnosis'
 }
 
 </script>
@@ -128,12 +127,39 @@ var labels = {
 	</fieldset>
 </form>
 <div class="chart barchart percent horizontal" data-duration="1500" data-ticks="6" data-rotate="true" data-csv="/static/data/2010PopPercentages.csv"></div>
+<div class="actions">
+	<a href="#" class="button share">Share</a>
+	<a href="#" class="button export">Export</a>
+</div>
 {% endblock %}
 
 {% block footer %}
-<p>Data collected from <a href="http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk">2010 Census</a> and San Francisco Department of Public Health's <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report.</a></p>
-<p>Living HIV and AIDS statistics can be found on page 15, table 3.1, of the HIV/AIDS Epidemiology Annual Report.  Cumulative and Incidence data can be found on page 7.</p>
-<p>HIV Testing data was collected by CTL from August 2011 to December 2011.  This data set represents amount of HIV tests collected at public San Francisco based clinics.</p>
+<ul class="definitions">
+	<li>
+		<h4>Population of San Francisco</h4>
+		<p>The current population living in the city of San Francisco, California.  This data was collected from the <a href="http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk">2010 Census</a></p>
+	</li>
+	<li>
+		<h4>Cumulative Cases</h4>
+		<p>Cumulative cases are the total number of cases of HIV and AIDS infections tracked by the San Francisco Department of Public Health.</p>
+		<p>This data was collected by the SF DPH and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 1, table 1.1.</p>
+	</li>
+	<li>
+		<h4>Living Cases of AIDS</h4>
+		<p>Living cases of AIDS is a count of all persons living in San Francisco who are diagnosed with AIDS.  These figures include people who were diagnosed with HIV while a resident of San Francisco and progressed to AIDS while a resident of another jurisdiction.</p>
+		<p>This data was collected by the San Francisco Department of Public Health and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 16, table 3.2.</p>
+	</li>
+	<li>
+		<h4>Living Cases of HIV non-AIDS</h4>
+		<p>Living cases of HIV non-AIDS is a count of all living persons diagnosed with HIV in San Francisco who have not progressed to AIDS.</p> 
+		<p>This data was collected by the San Francisco Department of Public Health and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 17, table 3.3.</p>
+	</li>
+	<li>
+		<h4>New HIV Diagnosis</h4>
+		<p>This is a measure of all cases diagnosed and reported to the San Francisco Department of Public Health.  An important note about this figure is that diagnosis does not mean new infection.</p>
+		<p>This data was collected by the San Francisco Department of Public Health and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 1, table 1.1.</p>
+	</li>
+</ul>
 {% endblock %}
 
 {% block templates %}
