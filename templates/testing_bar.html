@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="/static/css/barchart.css" />
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="/static/js/testing_barchart.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.address.parameter("type","ethnicity");
+	
+	$("body").delegate(".navigation .type input","click",function(event){
+		$.address.parameter("type", $(this).val());
+	}).delegate(".navigation .filter input","click",function(event){
+		$.address.parameter("filter", $(this).val());
+	});
+	$("#percent").click(function(){
+		if(this.checked){
+			$.address.parameter("percent",this.value);
+		}else{
+			$.address.parameter("percent","");
+		}
+	});
+	$("#scale").click(function(){
+		if(this.checked){
+			$.address.parameter("scale",this.value);
+		}else{
+			$.address.parameter("scale","");
+		}
+	});
+});
+</script>
+{% endblock %}
+{% block content %}
+<form class="navigation">
+	<fieldset class="type">
+		<legend>Group</legend>
+		<label><input type="radio" name="type" value="ethnicity">Ethnicity</label>
+		<label><input type="radio" name="type" value="gender">Gender</label>
+		<label><input type="radio" name="type" value="age">Age</label>
+		<label><input type="radio" name="type" value="site">Location Type</label>
+	</fieldset>
+	<fieldset class="percent">
+		<legend>Adjust chart</legend>
+		<label><input id="percent" type="checkbox" />View metrics as percent of total population.</label>
+		<label class="percent only"><input id="scale" type="checkbox" />Zoom in</label>
+	</fieldset>
+</form>
+<div class="chart barchart horizontal" data-duration="1500" data-ticks="6" data-src="/data/treemap.json"></div>
+<form class="navigation">
+	<fieldset class="filter">
+		<legend>View only group</legend>
+		<label><input type="radio" name="filter" value="size">View All</label>
+		<fieldset class="ethnicity">
+			<legend>Ethnicity</legend>
+			<label><input type="radio" name="filter" value="White">White</label>
+			<label><input type="radio" name="filter" value="African American">African American</label>
+			<label><input type="radio" name="filter" value="Latino">Hispanic/Latino</label>
+			<label><input type="radio" name="filter" value="Asian">Asian/Pacific Islander</label>
+			<label><input type="radio" name="filter" value="Native American">Native American</label>
+			<label><input type="radio" name="filter" value="Declined">Declined</label>
+			<label><input type="radio" name="filter" value="Other">Other</label>
+		</fieldset>
+		<fieldset class="gender">
+			<legend>Gender</legend>
+			<label><input type="radio" name="filter" value="Male">Male</label>
+			<label><input type="radio" name="filter" value="Female">Female</label>
+			<label><input type="radio" name="filter" value="Trans">Trans</label>
+		</fieldset>
+		<fieldset class="age">
+			<legend>Age</legend>
+			<label><input type="radio" name="filter" value="0-12">0 to 12</label>
+			<label><input type="radio" name="filter" value="13-19">13 to 19</label>
+			<label><input type="radio" name="filter" value="20-29">20 to 29</label>
+			<label><input type="radio" name="filter" value="30-39">30 to 39</label>
+			<label><input type="radio" name="filter" value="40-49">40 to 49</label>
+			<label><input type="radio" name="filter" value="50+">50+</label>
+		</fieldset>
+		<fieldset class="site">
+			<legend>Location Type</legend>
+			<label><input type="radio" name="filter" value="Methadone">Methadone</label>
+			<label><input type="radio" name="filter" value="Community Based Organization">Community Clinic</label>
+		</fieldset>
+	</fieldset>
+</form>
+{% endblock %}
+
+{% block templates %}
+{% endblock %}
