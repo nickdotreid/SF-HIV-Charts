@@ -12,6 +12,20 @@ a,a:visited{
 	display:none;
 }
 
+.button{
+	padding:3px 7px 5px;
+	text-decoration:none;
+	background-color:#d4d4d4;
+	color:#000;
+	font-weight:500;
+	border:1px #666 solid;
+	border-radius:3px;
+	box-shadow:2px 2px 2px #999;
+}
+.button:hover,.button.hover{
+	background-color:#a9a9a9;
+}
+
 .wrapper{
 	width:850px;
 	background:#FFF;
