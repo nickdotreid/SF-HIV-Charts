@@ -97,6 +97,10 @@
 	left:-20px;	
 }
 
+.barchart .bar.hoverable.hover .line{
+	background-color:#92d0ff;
+}
+
 .barchart .hover .number{
 	color:#000;
 	font-size:1em;

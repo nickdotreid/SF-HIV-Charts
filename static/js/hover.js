@@ -12,12 +12,17 @@ $(document).ready(function(){
 			number.append('<div class="bottom"></div>');
 		}
 		$(".total,.more,.bottom",number).show();
-		$(".bottom",number).css("top",number.height()+6+'px');
+		bottom = $(".bottom",number);
+		borderbottom = Number(number.css('border-bottom-width').replace('px',''));
+		bottom.css("top",number.height()+(bottom.height()/2)-(borderbottom/2)+'px');
+		bottom.css("left",'0px');
 		number.css("top",(0-number.height())+'px');
 	}).delegate('.hoverable','mouseleave',function(){
 		$(this).removeClass("hover");
 		number = $(".number",$(this));
 		$(".total,.more,.bottom",number).hide();
 		number.css("top",(0-number.height())+'px');
+	}).delegate(".number a","click",function(event){
+		event.preventDefault();
 	});
 });
