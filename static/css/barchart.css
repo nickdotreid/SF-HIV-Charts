@@ -47,12 +47,12 @@
 
 
 .barchart.horizontal{
-	height:400px;
+	height:300px;
 }
 .barchart.horizontal .bar{
 	width:90px;
 	margin-right:10px;
-	height:400px;
+	height:300px;
 	float:left;
 }
 .barchart.horizontal .line{
@@ -63,7 +63,7 @@
 }
 .barchart.horizontal .title{
 	position:absolute;
-	top:410px;
+	top:310px;
 	left:0px;
 	width:100%;
 	text-align:center;
@@ -79,7 +79,7 @@
 .barchart.horizontal .rule .tick{
 	border-left:0px;
 	border-top:1px #000 solid;
-	top:400px;
+	top:300px;
 }
 
 .barchart .number{
