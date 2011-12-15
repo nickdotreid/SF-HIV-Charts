@@ -67,7 +67,7 @@ $(document).ready(function(event){
 				}
 				tick.html(format_number(tick.data("value")));
 				tick.animate({
-					"top":(400-Number(x(Number(tick.data("value"))).replace('px','')))+'px',
+					"top":(chart.height()-Number(x(Number(tick.data("value"))).replace('px','')))+'px',
 					"opacity":opacity
 				},{
 					"duration":duration
