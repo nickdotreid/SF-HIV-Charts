@@ -3,6 +3,9 @@ var color = d3.scale.category20();
 var oldPieData = [];
 var arc = false;
 
+var oldDonut = false;
+var donut = false;
+
 $(document).ready(function(){
 	$("body").delegate(".navigation .type input","click",function(event){
 		$.address.parameter("type", $(this).val());
@@ -11,7 +14,9 @@ $(document).ready(function(){
 	}).delegate(".chart","loadr",function(){
 		chart = $(this);
 		if(chart.data("data")){
-			chart.data("old-data",chart.data("data"));
+			chart.data("oldData",chart.data("data"));
+		}else{
+			setTimeout('$(".chart:first").data("oldData",$(".chart:first").data("data"));',2000)
 		}
 		type=unescape($.address.parameter("type"));
 		$.ajax({
@@ -38,7 +43,13 @@ $(document).ready(function(){
 			arc_group = vis.append("svg:g").attr("class", "arc").attr("transform", "translate(" + r + "," + r + ")");
 		}
 		
-		var donut = d3.layout.pie().value(function(d){
+		oldPieData = [];
+		d3.selectAll(".chart path").attr("fill",function(d,i){
+			oldPieData.push(d);
+			return color(i);
+		});
+		
+		donut = d3.layout.pie().value(function(d){
 			param = $.address.parameter("filter");
 			if(!param){
 				param = 'size';
@@ -49,16 +60,10 @@ $(document).ready(function(){
 			}
 			return num;
 		});
-		arc = d3.svg.arc().innerRadius(0).outerRadius(r);
-		
-		if(chart.data("old-data")){
-			oldPieData = chart.data("old-data");
-		}
+		arc = d3.svg.arc().innerRadius(r*0.6).outerRadius(r);
 		
 		arc_group.data([data]);
-		
 		tweenTime = 1500;
-		
 		paths = arc_group.selectAll("path").data(donut);
 		paths.enter().append("svg:path")
 		    .attr("fill", function(d, i) { return color(i); }).attr("d", arc);
