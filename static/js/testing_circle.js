@@ -45,7 +45,7 @@ $(document).ready(function(){
 		}
 		
 		oldPieData = [];
-		d3.selectAll(".chart path").attr("fill",function(d,i){
+		d3.selectAll(".chart path").attr("data-damne",function(d,i){
 			oldPieData.push(d);
 			return color(d['data']['name']);
 		});
@@ -66,10 +66,12 @@ $(document).ready(function(){
 		arc_group.data([data]);
 		tweenTime = 500;
 		paths = arc_group.selectAll("path").data(donut);
-		paths.enter().append("svg:path")
-		    .attr("fill", function(d, i) { return color(d.data['name']); }).transition().duration(tweenTime).attrTween("d", pieTween);
-		paths.transition().duration(tweenTime).attrTween("d", pieTween);
+		paths.enter().append("svg:path");
+		paths.attr("fill", function(d, i) { return color(d['data']['name']); }).attr("data-name",function(d){ return d['data']['name']; }).transition().duration(tweenTime).attrTween("d", pieTween);
 		paths.exit().transition().duration(tweenTime).attrTween("d", removePieTween).remove();
+		
+		$(".legend li").remove();
+		d3.selectAll('.legend').selectAll("li").data(data).enter().append("li").text(function(d){ return d.name; }).style("background-color",function(d){ return color(d.name); });
 	});
 });
 
