@@ -1,5 +1,5 @@
 
-var color = d3.scale.category20();
+var color = d3.scale.category20c();
 var oldPieData = [];
 var arc = false;
 
@@ -41,12 +41,13 @@ $(document).ready(function(){
 				.style("width", chart.width() + "px")
 				.style("height", chart.height() + "px");
 			arc_group = vis.append("svg:g").attr("class", "arc").attr("transform", "translate(" + r + "," + r + ")");
+			chart.append("<ul class='legend'></ul>");
 		}
 		
 		oldPieData = [];
 		d3.selectAll(".chart path").attr("fill",function(d,i){
 			oldPieData.push(d);
-			return color(i);
+			return color(d['data']['name']);
 		});
 		
 		donut = d3.layout.pie().value(function(d){
@@ -60,15 +61,15 @@ $(document).ready(function(){
 			}
 			return num;
 		});
-		arc = d3.svg.arc().innerRadius(r*0.6).outerRadius(r);
+		arc = d3.svg.arc().innerRadius(r*0.2).outerRadius(r*0.8);
 		
 		arc_group.data([data]);
-		tweenTime = 1500;
+		tweenTime = 500;
 		paths = arc_group.selectAll("path").data(donut);
 		paths.enter().append("svg:path")
-		    .attr("fill", function(d, i) { return color(i); }).attr("d", arc);
+		    .attr("fill", function(d, i) { return color(d.data['name']); }).transition().duration(tweenTime).attrTween("d", pieTween);
 		paths.transition().duration(tweenTime).attrTween("d", pieTween);
-		paths.exit().remove();
+		paths.exit().transition().duration(tweenTime).attrTween("d", removePieTween).remove();
 	});
 });
 
