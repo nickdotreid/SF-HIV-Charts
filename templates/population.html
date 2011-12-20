@@ -82,13 +82,13 @@
 <form class="controls">
 	<fieldset class="filter">
 		<legend>View measurement</legend>
-		<label><input type="radio" name="filter" value="Incidence" />New HIV Infections</label>
-		<label><input type="radio" name="filter" value="Population" />HIV+ Population</label>
+		<label><input type="radio" name="filter" value="Incidence" />New HIV Diagnosis</label>
+		<label><input type="radio" name="filter" value="Population" />People living with AIDS/HIV</label>
 	</fieldset>
 	<fieldset class="total">
 		<legend>Measure against</legend>
-		<label><input type="radio" name="overall" value="Population" />HIV+ Population</label>
-		<label><input type="radio" name="overall" value="Census" />San Francisco Population</label>
+		<label><input type="radio" name="overall" value="Population" />People living with AIDS/HIV</label>
+		<label><input type="radio" name="overall" value="Census" />People living in San Francisco</label>
 	</fieldset>
 	<fieldset>
 		<legend>Adjust graph</legend>
@@ -101,9 +101,22 @@
 {% endblock %}
 
 {% block footer %}
-<p>HIV+ population refers to people living with HIV and/or AIDS.  New HIV infections refers to all new cases of HIV diagnosed in the city of San Francisco.</p>
-<p>The HIV+ population data illustrated on this page is from the San Francisco Department of Public Health's <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Annual Epidemiology Report.</a> People living with HIV/AIDS statistics can be found on page 15 in Table 3.1. Metics of new HIV infections can be found on Page 1, Table 1.1.</p>
-<p>San Francisco population statistics are from the <a href="http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk">2010 US Census.</a></p>
+<ul class="definitions">
+	<li>
+		<h4>People living with AIDS/HIV</h4>
+		<p>This metric is the number of living people with cases of HIV and/or AIDS in San Francisco.  This figures include people who were diagnosed with HIV while a resident of San Francisco and progressed to AIDS while a resident of another jurisdiction.</p>
+		<p>This data is from the San Francisco Department of Public Health's <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Annual Epidemiology Report</a> on page 15 in Table 3.1.</p>
+	</li>
+	<li>
+		<h4>New HIV Diagnosis</h4>
+		<p>This is a measure of all cases diagnosed and reported to the San Francisco Department of Public Health.  An important note about this figure is that diagnosis does not mean new infection.</p>
+		<p>This data was collected by the San Francisco Department of Public Health and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 1, table 1.1.</p>
+	</li>
+	<li>
+		<h4>People living in San Francisco</h4>
+		<p>San Francisco population statistics are from the <a href="http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk">2010 US Census.</a></p>
+	</li>
+</ul>
 {{super()}}
 {% endblock %}
 
