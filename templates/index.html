@@ -2,10 +2,26 @@
 
 {% block content %}
 <ul>
-	<li><a href="/treemap">Treemap of Testing Data</a></li>
-	<li><a href="/bar#/?type=ethnicity&filter=Census">Bar Chart of 2010 Population</a></li>
-	<li><a href="/population#/?type=ethnicity&filter=White&percent=on">2010 Population</a></li>
-	<li><a href="/population/config#/?type=ethnicity&filter=Population&percent=on&total=Population">Configurable Version of 2010 Population</a></li>
-	<li><a href="/regional">Regional HIV Populations</a></li>
+	<li>
+		<h3>Testing Data</h3>
+		<ul>
+			<li><a href="/testing">Bar Chart of Testing Data</a></li>
+			<li><a href="/testing/circle">Pie Chart of Testing Data</a></li>
+			<li><a href="/testing/treemap">Treemap of Testing Data</a></li>
+		</ul>
+	</li>
+	<li>
+		<h3>San Francisco Population</h3>
+		<ul>
+			<li><a href="/population#/?type=ethnicity&filter=White&percent=on">Bar Chart of Population</a></li>
+			<li><a href="/population/config#/?type=ethnicity&filter=Population&total=Population">Configurable Bar Chart of Population</a></li>
+		</ul>
+	</li>
+	<li>
+		<h3>Regional Differences in HIV Populations</h3>
+		<ul>
+			<li><a href="http://127.0.0.1:5000/regional#/?type=ethnicity&filter=Male">Bar Chart Comparing San Francisco, California, and United States Populations</a></li>
+		</ul>
+	</li>
 </ul>
 {% endblock %}
