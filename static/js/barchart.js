@@ -19,7 +19,12 @@ $(document).ready(function(event){
 				.data(data)
 				.enter().append("div")
 					.attr("class","bar hoverable")
-					.append("div").attr("class","title").text(function(d){ return better_label(d.Category); });
+					.append("div").attr("class","title")
+						.append("div").text(function(d){ return better_label(d.Category); })
+						.append("div").text(function(d){ return "of "+format_number(return_total(d))})
+						.append("div").attr("class","activate").html(function(){
+							return "<input type='checkbox' />";
+						});
 			if(chart.hasClass("horizontal")){
 				d3.selectAll(".barchart .bar").append("div").attr("class","line").style("height",0);
 			}else{
@@ -95,6 +100,10 @@ $(document).ready(function(event){
 
 function filter_data(data){
 	return data;
+}
+
+function return_total(d){
+	return Number(d['Total']);
 }
 
 function return_number(d){
