@@ -1,0 +1,175 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="/static/css/barchart.css" />
+<link rel="stylesheet" href="/static/css/highlight.css" />
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.csv.min.js"></script>
+<script type="text/javascript" src="/static/js/barchart.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.address.parameter("type","ethnicity");
+	
+	$("form .only").hide();
+	
+	$("form.controls .filter input").click(function(event){
+		$.address.parameter("filter",this.value);
+	});
+	$("#percent").click(function(){
+		if(this.checked){
+			$.address.parameter("percent",this.value);
+		}else{
+			$.address.parameter("percent","");
+		}
+	});
+	$("#scale").click(function(){
+		if(this.checked){
+			$.address.parameter("scale",this.value);
+		}else{
+			$.address.parameter("scale","");
+		}
+	});
+	
+	$("#no-census").click(function(){
+		if(this.checked){
+			$.address.parameter("no-census",this.value);
+		}else{
+			$.address.parameter("no-census","");
+		}
+	});
+	
+	$.address.change(function(event){
+		if($.address.parameter("percent") && $.address.parameter("percent")!=""){
+			$("#percent").attr("checked",true);
+			$(".percent.only").show();
+			$(".no-percent.only").hide();
+		}else{
+			$("#percent").attr("checked",false);
+			$(".percent.only").hide();
+			$(".no-percent.only").show();
+		}
+		if($.address.parameter("scale") && $.address.parameter("scale")!=""){
+			$("#scale").attr("checked",true);
+		}else{
+			$("#scale").attr("checked",false);
+		}
+		
+		if($.address.parameter("no-census") && $.address.parameter("no-census")!=""){
+			$("#no-census").attr("checked",true);
+		}else{
+			$("#no-census").attr("checked",false);
+		}
+		
+		if($.address.parameter("filter") && $.address.parameter("filter")!=""){
+			$("input[value='"+unescape($.address.parameter("filter"))+"']").attr("checked",true)
+		}
+		
+	});
+});
+
+function return_number(d){
+	if(!$.address.parameter("percent") || $.address.parameter("percent")==""){
+		$(".chart").removeClass("percent");
+		if($.address.parameter("no-census") && d['Category']=='Census'){
+			return 0;
+		}
+		return Number(d[unescape($.address.parameter("filter"))]);
+	}
+	$(".chart").addClass("percent");
+	return Math.round(d[unescape($.address.parameter("filter"))]/return_total(d)*100);
+}
+
+function better_label(label){
+	for(key in labels){
+		if(key==label){
+			return labels[key]
+		}
+	}
+	return label;
+}
+
+function return_total(d){
+	num = $('.chart').data("data")[0][unescape($.address.parameter("filter"))]
+	if(!num){
+		return 0;
+	}
+	return Number(num);
+}
+
+var labels = {
+	'Census':'Population in San Francisco',
+	'Cumulative':'Cumulative HIV/AIDS cases',
+	'Living AIDS':'People living with AIDS',
+	'Living HIV':'People living with HIV, non-AIDS',
+	'Incidence':'New HIV diagnosis'
+}
+
+</script>
+{% endblock %}
+
+{% block header %}
+<h1>San Francisco Ethnic Demographics by HIV Status in 2010</h1>
+{% endblock %}
+
+{% block content %}
+<form class="controls">
+	<fieldset class="filter">
+		<legend>Pick an ethnicity to view</legend>
+		<label class="radio"><input name="filter" type="radio" value="Census" />Population in San Francisco</label>
+		<label class="radio"><input name="filter" type="radio" value="Cumulative" />Cumulative HIV/AIDS cases</label>
+		<label class="radio"><input name="filter" type="radio" value="Living AIDS" />People living with AIDS</label>
+		<label class="radio"><input name="filter" type="radio" value="Living HIV" />People Living with HIV, non-AIDS</label>
+		<label class="radio"><input name="filter" type="radio" value="Incidence" />New HIV Diagnosis</label>
+	</fieldset>
+	<fieldset class="percent">
+		<legend>Adjust chart</legend>
+		<label><input id="percent" type="checkbox" />View metrics as percent of total population.</label>
+		<label class="percent only"><input id="scale" type="checkbox" />Zoom in</label>
+		<label class="no-percent only"><input id="no-census" type="checkbox" />Hide total San Francisco Population metric.</label>
+	</fieldset>
+</form>
+<div class="chart barchart percent horizontal" data-duration="1000" data-ticks="6" data-csv="/static/data/2010PopPercentages.csv"></div>
+<div class="actions">
+	<a href="#" class="button share">Share</a>
+</div>
+{% endblock %}
+
+{% block footer %}
+<ul class="definitions">
+	<li>
+		<h4>Population of San Francisco</h4>
+		<p>The current population living in the city of San Francisco, California.  This data was collected from the <a href="http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?src=bkmk">2010 Census</a></p>
+	</li>
+	<li>
+		<h4>Cumulative Cases</h4>
+		<p>Cumulative cases are the total number of cases of HIV and AIDS infections tracked by the San Francisco Department of Public Health.</p>
+		<p>This data was collected by the SF DPH and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 1, table 1.1.</p>
+	</li>
+	<li>
+		<h4>Living Cases of AIDS</h4>
+		<p>Living cases of AIDS is a count of all persons living in San Francisco who are diagnosed with AIDS.  These figures include people who were diagnosed with HIV while a resident of San Francisco and progressed to AIDS while a resident of another jurisdiction.</p>
+		<p>This data was collected by the San Francisco Department of Public Health and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 16, table 3.2.</p>
+	</li>
+	<li>
+		<h4>Living Cases of HIV non-AIDS</h4>
+		<p>Living cases of HIV non-AIDS is a count of all living persons diagnosed with HIV in San Francisco who have not progressed to AIDS.</p> 
+		<p>This data was collected by the San Francisco Department of Public Health and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 17, table 3.3.</p>
+	</li>
+	<li>
+		<h4>New HIV Diagnosis</h4>
+		<p>This is a measure of all cases diagnosed and reported to the San Francisco Department of Public Health.  An important note about this figure is that diagnosis does not mean new infection.</p>
+		<p>This data was collected by the San Francisco Department of Public Health and is available in the <a href="http://sfhiv.org/documents/AnnualReport2010GreenSurveillance.pdf">2010 HIV/AIDS Epidemiology Annual Report</a> on page 1, table 1.1.</p>
+	</li>
+</ul>
+{% endblock %}
+
+{% block templates %}
+<div class="highlight"></div>
+{% endblock %}
