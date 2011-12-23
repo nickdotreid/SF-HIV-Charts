@@ -110,7 +110,14 @@ var labels = {
 	'Living HIV':'People living with HIV, non-AIDS',
 	'Incidence':'New HIV diagnosis'
 }
+$(document).ready(function(){
+	$.address.change(function(event){
+		filter = unescape($.address.parameter("filter")).replace(" ","");
+		$(".notes.definitions li").hide();
+		$(".notes.definitions li."+filter).show();
+	});
 
+});
 </script>
 {% endblock %}
 
@@ -142,7 +149,7 @@ var labels = {
 {% endblock %}
 
 {% block footer %}
-<ul class="notes">
+<ul class="notes detail">
 	<li class="WHITE">
 		<h4>White Majority</h4>
 		<p>White people are the majority of San Francsico's populaiton, and demographically they make up an equal proportion of HIV+ population.</p>
