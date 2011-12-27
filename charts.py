@@ -32,10 +32,14 @@ def regional():
 @app.route('/population/config')
 def population_map():
 	return render_template('population.html')
+
+@app.route('/population/ethnicity')
+	def population_ethnicity_map():
+		return render_template('population_ethnicity.html')
 	
 @app.route('/population')
 def population_simple_map():
-	return render_template('population_ethnicity.html')
+	return render_template('population_simple.html')
 	
 @app.route('/bar')
 def bar_charts():

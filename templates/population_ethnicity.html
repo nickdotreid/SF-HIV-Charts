@@ -116,7 +116,9 @@ $(document).ready(function(){
 		$(".notes.definitions li").hide();
 		$(".notes.definitions li."+filter).show();
 	});
-
+	$('.chart').delegate('.hoverable','mouseenter',function(event){
+		$(".notes.detail li").hide();
+	});
 });
 </script>
 {% endblock %}
