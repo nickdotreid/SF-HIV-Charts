@@ -34,8 +34,8 @@ def population_map():
 	return render_template('population.html')
 
 @app.route('/population/ethnicity')
-	def population_ethnicity_map():
-		return render_template('population_ethnicity.html')
+def population_ethnicity_map():
+	return render_template('population_ethnicity.html')
 	
 @app.route('/population')
 def population_simple_map():
