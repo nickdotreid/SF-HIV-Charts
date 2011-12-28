@@ -4,6 +4,37 @@
 {{super()}}
 <link rel="stylesheet" href="/static/css/barchart.css" />
 <link rel="stylesheet" href="/static/css/highlight.css" />
+<style type="text/css">
+	#content,.footer{
+		clear:none;
+		float:left;
+		display:block;
+	}
+	#templates{
+		display:block;
+		clear:both;
+	}
+	
+	#content{
+		width:525px;
+	}
+	
+	.footer{
+		width:325px;
+	}
+	
+	.container{
+		padding:70px 0px 70px 40px
+	}
+	.barchart.horizontal .rule{
+		left:-40px;
+		font-size:0.8em;
+	}
+	.barchart.horizontal .bar{
+		width:65px;
+	}
+	
+</style>
 {% endblock %}
 
 {% block scripts %}
@@ -121,8 +152,8 @@ var labels = {
 	<fieldset class="filter">
 		<legend>Pick exposure category</legend>
 		<label class="radio"><input name="filter" type="radio" value="Total" />Total</label>
-		<label class="radio"><input name="filter" type="radio" value="MSM" />Men who have sex with men (MSM)</label>
-		<label class="radio"><input name="filter" type="radio" value="IDU" />Intravenous Drug User (IDU)</label>
+		<label class="radio"><input name="filter" type="radio" value="MSM" />MSM</label>
+		<label class="radio"><input name="filter" type="radio" value="IDU" />IDU</label>
 		<label class="radio"><input name="filter" type="radio" value="MSM IDU" />MSM IDU</label>
 		<label class="radio"><input name="filter" type="radio" value="Hetrosexual" />Hetrosexual</label>
 		<label class="radio"><input name="filter" type="radio" value="Transfusion" />Transfusion/Hemophilia</label>
@@ -132,7 +163,6 @@ var labels = {
 		<legend>Adjust chart</legend>
 		<label><input id="percent" type="checkbox" />View metrics as percent of total population.</label>
 		<label class="percent only"><input id="scale" type="checkbox" />Zoom in</label>
-		<label class="no-percent only"><input id="no-census" type="checkbox" />Hide total San Francisco Population metric.</label>
 	</fieldset>
 </form>
 {% endblock %}
