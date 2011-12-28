@@ -134,6 +134,17 @@ var labels = {
 	'Incidence':'New HIV diagnosis'
 }
 
+$(document).ready(function(){
+	$.address.change(function(event){
+		filter = unescape($.address.parameter("filter")).replace(" ","");
+		$(".notes li").hide();
+		$(".notes li."+filter).show();
+	});
+	$('.chart').delegate('.hoverable','mouseenter',function(event){
+		$(".notes.detail li").hide();
+	});
+});
+
 </script>
 {% endblock %}
 
@@ -168,31 +179,31 @@ var labels = {
 {% endblock %}
 
 {% block footer %}
-<ul class="definitions">
-	<li>
+<ul class="notes definitions">
+	<li class="MSM">
 		<h4>MSM</h4>
 		<p>Men who have sex with men.</p>
 	</li>
-	<li>
+	<li class="IDU">
 		<h4>IDU</h4>
 		<p>Injection drug user.</p>
 	</li>
-	<li>
+	<li class="MSM IDU">
 		<h4>MSM IDU</h4>
 		<p>Category compromising of men who have sex with men, and use injection drugs concurrently.</p>
 	</li>
 </ul>
-<ul class="notes">
-	<li>
+<ul class="notes details">
+	<li class="MSM">
 		<p>Among men, MSM accounts for the majority of HIV infections with in all race/ethnic groups.</p>
 	</li>
-	<li>
+	<li class="IDU AfricanAmerican">
 		<p>In African American men, injection drug use among Hetrosexuals is the second highest exposure category.</p>
 	</li>
-	<li>
+	<li class="MSMIDU">
 		<p>Men of all racial/ethnic groups, except African American, MSM IDU represents the second most frequent exposure category.</p>
 	</li>
-	<li>
+	<li class="Heterosexual Transfusion Other">
 		<p>Cumulatively, less than 2% of men with AIDS acquired HIV infection through heterosexual contact, transfusion of blood or blood products, or other exposure categories.</p>
 	</li>
 </ul>
