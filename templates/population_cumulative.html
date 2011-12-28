@@ -150,6 +150,10 @@ $(document).ready(function(){
 		if(category){
 			$(".notes.detials li."+label_to_classname(category)).show();
 		}
+	}).delegate('.hoverable','mouseleave',	function(event){
+		filter = unescape($.address.parameter("filter")).replace(" ","");
+		$(".notes li").hide();
+		$(".notes li."+filter).show();
 	});
 });
 
