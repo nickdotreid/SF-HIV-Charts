@@ -141,9 +141,21 @@ $(document).ready(function(){
 		$(".notes li."+filter).show();
 	});
 	$('.chart').delegate('.hoverable','mouseenter',function(event){
-		$(".notes.detail li").hide();
+		$(".notes.detials li").hide();
+		category = false;
+		d3.select(this).attr("foo",function(d){
+			category = d['Category'];
+			return true;
+		});
+		if(category){
+			$(".notes.detials li."+label_to_classname(category)).show();
+		}
 	});
 });
+
+function label_to_classname(str){
+	return str.replace(/ /gi,"").replace(/\//gi,"");
+}
 
 </script>
 {% endblock %}
@@ -193,7 +205,7 @@ $(document).ready(function(){
 		<p>Category compromising of men who have sex with men, and use injection drugs concurrently.</p>
 	</li>
 </ul>
-<ul class="notes details">
+<ul class="notes detials">
 	<li class="MSM">
 		<p>Among men, MSM accounts for the majority of HIV infections with in all race/ethnic groups.</p>
 	</li>
