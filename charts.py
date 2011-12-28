@@ -37,6 +37,10 @@ def population_map():
 def population_ethnicity_map():
 	return render_template('population_ethnicity.html')
 	
+@app.route('/population/cumulative')
+def population_cumulative_map():
+	return render_template('population_cumulative.html')
+
 @app.route('/population')
 def population_simple_map():
 	return render_template('population_simple.html')

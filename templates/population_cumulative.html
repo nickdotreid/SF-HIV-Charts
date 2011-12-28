@@ -1,0 +1,173 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="/static/css/barchart.css" />
+<link rel="stylesheet" href="/static/css/highlight.css" />
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script type="text/javascript" src="/static/js/jquery.address-1.4.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.layout.min.js"></script>
+<script type="text/javascript" src="/static/js/d3/d3.csv.min.js"></script>
+<script type="text/javascript" src="/static/js/barchart.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.address.parameter("type","ethnicity");
+	
+	$("form .only").hide();
+	
+	$("form.controls .filter input").click(function(event){
+		$.address.parameter("filter",this.value);
+	});
+	$("#percent").click(function(){
+		if(this.checked){
+			$.address.parameter("percent",this.value);
+		}else{
+			$.address.parameter("percent","");
+		}
+	});
+	$("#scale").click(function(){
+		if(this.checked){
+			$.address.parameter("scale",this.value);
+		}else{
+			$.address.parameter("scale","");
+		}
+	});
+	
+	$("#no-census").click(function(){
+		if(this.checked){
+			$.address.parameter("no-census",this.value);
+		}else{
+			$.address.parameter("no-census","");
+		}
+	});
+	
+	$.address.change(function(event){
+		if($.address.parameter("percent") && $.address.parameter("percent")!=""){
+			$("#percent").attr("checked",true);
+			$(".percent.only").show();
+			$(".no-percent.only").hide();
+		}else{
+			$("#percent").attr("checked",false);
+			$(".percent.only").hide();
+			$(".no-percent.only").show();
+		}
+		if($.address.parameter("scale") && $.address.parameter("scale")!=""){
+			$("#scale").attr("checked",true);
+		}else{
+			$("#scale").attr("checked",false);
+		}
+		
+		if($.address.parameter("no-census") && $.address.parameter("no-census")!=""){
+			$("#no-census").attr("checked",true);
+		}else{
+			$("#no-census").attr("checked",false);
+		}
+		
+		if($.address.parameter("filter") && $.address.parameter("filter")!=""){
+			$("input[value='"+unescape($.address.parameter("filter"))+"']").attr("checked",true)
+		}
+		
+	});
+});
+
+function return_number(d){
+	if(!$.address.parameter("percent") || $.address.parameter("percent")==""){
+		$(".chart").removeClass("percent");
+		if($.address.parameter("no-census") && d['Category']=='Census'){
+			return 0;
+		}
+		return Number(d[unescape($.address.parameter("filter"))]);
+	}
+	$(".chart").addClass("percent");
+	return Math.round(d[unescape($.address.parameter("filter"))]/d['Total']*100);
+}
+
+function better_label(label){
+	for(key in labels){
+		if(key==label){
+			return labels[key]
+		}
+	}
+	return label;
+}
+
+var labels = {
+	'Census':'Population in San Francisco',
+	'Cumulative':'Cumulative HIV/AIDS cases',
+	'Living AIDS':'People living with AIDS',
+	'Living HIV':'People living with HIV, non-AIDS',
+	'Incidence':'New HIV diagnosis'
+}
+
+</script>
+{% endblock %}
+
+{% block header %}
+<h1>Cumulative AIDS Cases in San Francisco by Race/Ethnicity and Risk Category</h1>
+<p>Updated Jan. 2011</p>
+<p>For San Francisco AIDS cases, the distribution of HIV exposure categories differs by race/ethnicity and gender.</p>
+{% endblock %}
+
+{% block content %}
+<div class="actions">
+	<a href="#" class="button share">Share</a>
+</div>
+<div class="chart barchart percent horizontal" data-duration="1500" data-rotate="true" data-ticks="6" data-csv="/static/data/2010PopCumulative-Male.csv"></div>
+<form class="controls">
+	<fieldset class="filter">
+		<legend>Pick exposure category</legend>
+		<label class="radio"><input name="filter" type="radio" value="Total" />Total</label>
+		<label class="radio"><input name="filter" type="radio" value="MSM" />Men who have sex with men (MSM)</label>
+		<label class="radio"><input name="filter" type="radio" value="IDU" />Intravenous Drug User (IDU)</label>
+		<label class="radio"><input name="filter" type="radio" value="MSM IDU" />MSM IDU</label>
+		<label class="radio"><input name="filter" type="radio" value="Hetrosexual" />Hetrosexual</label>
+		<label class="radio"><input name="filter" type="radio" value="Transfusion" />Transfusion/Hemophilia</label>
+		<label class="radio"><input name="filter" type="radio" value="Other" />Other/Undefined</label>
+	</fieldset>
+	<fieldset class="percent">
+		<legend>Adjust chart</legend>
+		<label><input id="percent" type="checkbox" />View metrics as percent of total population.</label>
+		<label class="percent only"><input id="scale" type="checkbox" />Zoom in</label>
+		<label class="no-percent only"><input id="no-census" type="checkbox" />Hide total San Francisco Population metric.</label>
+	</fieldset>
+</form>
+{% endblock %}
+
+{% block footer %}
+<ul class="definitions">
+	<li>
+		<h4>MSM</h4>
+		<p>Men who have sex with men.</p>
+	</li>
+	<li>
+		<h4>IDU</h4>
+		<p>Injection drug user.</p>
+	</li>
+	<li>
+		<h4>MSM IDU</h4>
+		<p>Category compromising of men who have sex with men, and use injection drugs concurrently.</p>
+	</li>
+</ul>
+<ul class="notes">
+	<li>
+		<p>Among men, MSM accounts for the majority of HIV infections with in all race/ethnic groups.</p>
+	</li>
+	<li>
+		<p>In African American men, injection drug use among Hetrosexuals is the second highest exposure category.</p>
+	</li>
+	<li>
+		<p>Men of all racial/ethnic groups, except African American, MSM IDU represents the second most frequent exposure category.</p>
+	</li>
+	<li>
+		<p>Cumulatively, less than 2% of men with AIDS acquired HIV infection through heterosexual contact, transfusion of blood or blood products, or other exposure categories.</p>
+	</li>
+</ul>
+{% endblock %}
+
+{% block templates %}
+<div class="highlight"></div>
+{% endblock %}
